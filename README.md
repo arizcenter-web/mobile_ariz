@@ -16,6 +16,12 @@ App móvil nativa (Android) de **Ariz Proyectos**. Usa el mismo backend NestJS y
 ./gradlew test            # tests unitarios
 ```
 
+## Qué incluye
+
+Autenticación completa, Inicio, Buscar con filtros, detalle de propiedad (aviso de precio y consulta),
+proyectos (directorio y detalle), favoritos, perfil del agente, Ariz Club (puntos y canjes), inversiones con
+calculadora, cuenta, contacto y páginas informativas. Todo con el diseño y los textos de la web.
+
 ## Documentación
 
 La estructura de módulos, las reglas de dependencia, las convenciones y los pendientes

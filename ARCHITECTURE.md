@@ -15,6 +15,9 @@ core/
   model/              Modelos de dominio compartidos (Kotlin puro, sin Android)
   network/            Retrofit, OkHttp, SessionCookieJar, safeApiCall, DTOs/interceptores compartidos
   session/            SessionManager: usuario autenticado, restaurar (/auth/me), cerrar sesión, expiración
+  catalog/            Catálogo público compartido (propiedades y proyectos con filtros): Inicio, Buscar, listings, projects
+  favorites/          Favoritos del usuario: ids en vivo, guardar/quitar, FavoritesViewModel y rememberFavorites()
+  leads/              Formulario "Contacta al anunciante" (hoja inferior) de propiedades y proyectos
   database/           Room: @Database, DAOs y entidades compartidas (caché offline)
   datastore/          Preferencias no sensibles
   designsystem/       Tema (colores, tipografía, formas) y componentes base Ariz
@@ -28,19 +31,26 @@ build-logic/          Convention plugins (toda la config de Gradle compartida)
 | Feature      | Módulos del backend (`backend/src/modules`) |
 |--------------|---------------------------------------------|
 | `auth`       | `auth`                                      |
-| `home`       | `promotions`, `projects`, `properties`      |
-| `search`     | `properties`, `geo`                         |
-| `listings`   | `properties`                                |
-| `projects`   | `projects`                                  |
-| `favorites`  | `favorites`                                 |
-| `leads`      | `leads`, `contact-reports`                  |
-| `alerts`     | `alerts`                                    |
-| `agents`     | `agents`, `professionals`                   |
-| `account`    | `users`, `plans`                            |
-| `rewards`    | `referrals`, `redemptions`, `incentives`    |
+| `home`       | `properties`, `projects` (vía `core:catalog`) |
+| `search`     | `properties` (vía `core:catalog`)           |
+| `listings`   | `properties`, `alerts` (detalle y aviso de precio) |
+| `projects`   | `projects` (directorio y detalle)           |
+| `favorites`  | `favorites` (lista; el estado vive en `core:favorites`) |
+| `agents`     | `agents` (perfil público del anunciante)    |
+| `account`    | sesión (`core:session`): perfil y accesos   |
+| `rewards`    | `referrals`, `redemptions` (Ariz Club)      |
+| `investments`| `investment-opportunities`                  |
+| `info`       | `contact-reports` + páginas estáticas del web (nosotros, servicios, construye, ayuda, términos) |
 
-Aún sin feature (agregar cuando se necesiten): `claims`, `investment-opportunities`, `campaigns`,
-`media`. El web tiene carpetas equivalentes en `Ariz_Web_frontend/src/features`.
+No se implementó (paneles de gestión pensados para escritorio, fuera del alcance de la app de clientes):
+`admin/*`, `owner/*`, `claims` (libro de reclamaciones), `campaigns`, `media`. Los contactos recibidos por
+un profesional (`GET /leads/mine`) tampoco están: la app cubre a clientes e invitados.
+
+### Qué va en `core` y qué en una feature
+
+Una capacidad que usan **varias features** (favoritos, formulario de consulta, catálogo público) vive en
+`core:*` para que las features no se dependan entre sí. La feature que la necesita recibe lo que ofrece
+`core` y, para navegar a otra pantalla, pide el destino por un callback que `:app` resuelve.
 
 ## 2. Estructura interna de una feature
 
