@@ -5,6 +5,7 @@
     <!-- Solo debug: el backend local (http://10.0.2.2:4000) no tiene HTTPS. -->
     <application
         android:usesCleartextTraffic="true"
+        tools:replace="android:usesCleartextTraffic"
         tools:targetApi="m" />
 
 </manifest>
