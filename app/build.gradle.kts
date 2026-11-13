@@ -14,10 +14,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Host del sitio web: lo usa el intent-filter del enlace "restablecer contraseña".
         manifestPlaceholders["arizWebHost"] = providers.gradleProperty("arizWebHost").get()
+        // http solo si el backend de release se indica con http:// (APK de prueba en red local).
+        manifestPlaceholders["arizCleartext"] =
+            providers.gradleProperty("arizApiBaseUrl").map { it.startsWith("http://") }.orElse(false).get().toString()
     }
 
     buildTypes {
         release {
+            // APK de prueba instalable (-ParizSignWithDebug=true): lo firma con la llave de debug.
+            // Para publicar de verdad hay que firmar con la llave de release del equipo.
+            if (providers.gradleProperty("arizSignWithDebug").isPresent) {
+                signingConfig = signingConfigs.getByName("debug")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

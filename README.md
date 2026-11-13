@@ -16,6 +16,20 @@ App móvil nativa (Android) de **Ariz Proyectos**. Usa el mismo backend NestJS y
 ./gradlew test            # tests unitarios
 ```
 
+## APK de prueba para otros dispositivos
+
+El emulador ve el backend como `10.0.2.2`, pero un celular real necesita la IP de tu PC en la misma red Wi-Fi:
+
+```bash
+./gradlew :app:assembleRelease -ParizApiBaseUrl=http://<IP-de-tu-PC>:4000/ -ParizSignWithDebug=true
+# APK: app/build/outputs/apk/release/app-release.apk (~4 MB)
+```
+
+- La URL debe terminar en `/`. Con `http://` la app permite tráfico sin HTTPS; con `https://` no.
+- `-ParizSignWithDebug=true` lo firma con la llave de debug para poder instalarlo. **No sirve para publicar.**
+- Con el backend encendido y el firewall de Windows permitiendo el puerto 4000 en red privada.
+- Para el APK final, definir la URL pública con `-ParizApiBaseUrl=https://...` y firmar con la llave de release.
+
 ## Qué incluye
 
 Autenticación completa, Inicio, Buscar con filtros, detalle de propiedad (aviso de precio y consulta),
