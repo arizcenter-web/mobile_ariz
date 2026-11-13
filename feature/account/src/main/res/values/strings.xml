@@ -7,4 +7,7 @@
     <string name="account_role_admin">Administrador</string>
     <string name="account_role_user">Cliente</string>
     <string name="account_role_real_estate">Profesional inmobiliario</string>
+    <string name="account_menu_favorites">Mis favoritos</string>
+    <string name="account_menu_club">Ariz Club y recompensas</string>
+    <string name="account_menu_info">Ayuda e información</string>
 </resources>
