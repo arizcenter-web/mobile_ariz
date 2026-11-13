@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Directorio (Ariz_Web_frontend/src/features/projects/components/project-directory.tsx) -->
+    <string name="projects_back">Volver</string>
+    <string name="projects_retry">Reintentar</string>
+    <string name="projects_hero_badge">PROYECTOS INMOBILIARIOS</string>
+    <string name="projects_hero_title_1">Encuentra tu próximo proyecto </string>
+    <string name="projects_hero_title_2">en el Perú</string>
+    <string name="projects_hero_subtitle">Explora proyectos de vivienda e inversión de ARIZ y de inmobiliarias de todo el país.</string>
+
+    <string name="projects_stage_all">Todos los proyectos</string>
+    <string name="projects_stage_pre_sale">Preventa</string>
+    <string name="projects_stage_under_construction">En construcción</string>
+    <string name="projects_stage_delivered">Entregado</string>
+
+    <string name="projects_filter_district">Distrito</string>
+    <string name="projects_filter_district_placeholder">Buscar por distrito</string>
+    <string name="projects_filter_origin">Publicado por</string>
+    <string name="projects_origin_all">Todas las inmobiliarias</string>
+    <string name="projects_origin_ariz">ARIZ</string>
+    <string name="projects_origin_others">Otras inmobiliarias</string>
+    <string name="projects_filter_currency">Moneda</string>
+    <string name="projects_currency_pen">Soles (S/)</string>
+    <string name="projects_currency_usd">Dólares ($)</string>
+    <string name="projects_filter_budget">Presupuesto</string>
+    <string name="projects_budget_none">Sin límite</string>
+    <string name="projects_budget_up_to">Hasta %1$s</string>
+
+    <string name="projects_results_eyebrow">VIVIENDA E INVERSIÓN</string>
+    <string name="projects_results_title">Todos los proyectos</string>
+    <string name="projects_results_count">%1$d proyectos publicados</string>
+    <string name="projects_results_count_one">1 proyecto publicado</string>
+    <string name="projects_sort_label">Ordenar proyectos</string>
+    <string name="projects_sort_recent">Más recientes</string>
+    <string name="projects_sort_featured">Destacados primero</string>
+    <string name="projects_sort_price_asc">Menor precio</string>
+    <string name="projects_sort_price_desc">Mayor precio</string>
+    <string name="projects_empty">No hay proyectos que coincidan con estos filtros.</string>
+
+    <string name="projects_card_featured">Destacado</string>
+    <string name="projects_card_lots">%1$d lotes</string>
+    <string name="projects_card_apartments">%1$d departamentos</string>
+    <string name="projects_card_from">Desde %1$s</string>
+    <string name="projects_card_view">Ver proyecto</string>
+    <string name="projects_card_ariz_fallback">ARIZ</string>
+    <string name="projects_card_developer_fallback">Proyecto inmobiliario</string>
+
+    <!-- Detalle (Ariz_Web_frontend/src/app/(public)/project/[slug]/page.tsx) -->
+    <string name="projects_detail_no_photos">Sin fotos</string>
+    <string name="projects_detail_photo_counter">%1$d / %2$d</string>
+    <string name="projects_detail_stage_default">Proyecto</string>
+    <string name="projects_detail_down_payment">Desde %1$s de cuota inicial</string>
+    <string name="projects_detail_monthly_payment">%1$s / mes</string>
+
+    <string name="projects_spec_lots_one">1 lote</string>
+    <string name="projects_spec_lots_many">%1$d lotes</string>
+    <string name="projects_spec_apartments_one">1 departamento</string>
+    <string name="projects_spec_apartments_many">%1$d departamentos</string>
+    <string name="projects_spec_buildings_one">1 edificio</string>
+    <string name="projects_spec_buildings_many">%1$d edificios</string>
+    <string name="projects_spec_floors_one">1 pavimento</string>
+    <string name="projects_spec_floors_many">%1$d pavimentos</string>
+    <string name="projects_spec_start">Inicio %1$s</string>
+    <string name="projects_spec_delivery">Entrega %1$s</string>
+
+    <string name="projects_description">Descripción</string>
+    <string name="projects_read_more">Ver más</string>
+    <string name="projects_read_less">Ver menos</string>
+
+    <string name="projects_features">Características completas</string>
+    <string name="projects_features_general">GENERALES</string>
+    <string name="projects_features_amenities">AMENIDADES</string>
+    <string name="projects_features_services">SERVICIOS</string>
+    <string name="projects_features_certifications">CERTIFICACIONES</string>
+    <string name="projects_features_financing">FINANCIAMIENTO</string>
+    <string name="projects_features_no_amenities">Sin amenidades registradas.</string>
+    <string name="projects_row_type">Tipo de proyecto</string>
+    <string name="projects_row_stage">Etapa</string>
+    <string name="projects_row_developer">Desarrollador</string>
+    <string name="projects_row_buildings">Edificios</string>
+    <string name="projects_row_floors">Pavimentos</string>
+    <string name="projects_row_total_apartments">Departamentos totales</string>
+    <string name="projects_row_total_lots">Lotes totales</string>
+    <string name="projects_row_start">Inicio de obras</string>
+    <string name="projects_row_delivery">Entrega estimada</string>
+    <string name="projects_row_down_payment">Cuota inicial desde</string>
+    <string name="projects_row_monthly_payment">Cuota mensual desde</string>
+    <string name="projects_row_urbanization">Urbanización</string>
+    <string name="projects_row_registry">Partida registral</string>
+    <string name="projects_row_ruc">RUC</string>
+    <string name="projects_lot_mode_individual">Lotes individuales</string>
+    <string name="projects_lot_mode_group">Lotes agrupados</string>
+    <string name="projects_stage_full_pre_sale">En preventa</string>
+    <string name="projects_stage_full_under_construction">En construcción</string>
+    <string name="projects_stage_full_delivered">Entregado</string>
+
+    <string name="projects_lots_title">Lotes disponibles</string>
+    <string name="projects_apartments_title">Departamentos</string>
+    <string name="projects_lots_show_all">Ver los %1$d</string>
+    <string name="projects_lots_show_less">Ver menos</string>
+    <string name="projects_lot_number">Lote %1$s</string>
+    <string name="projects_lot_block">Mz. %1$s</string>
+    <string name="projects_lot_available">Disponible</string>
+    <string name="projects_lot_reserved">Reservado</string>
+    <string name="projects_lot_sold">Vendido</string>
+    <string name="projects_lot_blocked">No disponible</string>
+
+    <string name="projects_milestones">Cronograma</string>
+    <string name="projects_plans">Planos</string>
+    <string name="projects_plan_view">Ver plano</string>
+    <string name="projects_renders">Renders</string>
+    <string name="projects_tour">Ver recorrido virtual</string>
+
+    <string name="projects_location">Ubicación</string>
+    <string name="projects_open_maps">Abrir en Google Maps</string>
+    <string name="projects_approximate_location">Ubicación aproximada disponible por distrito</string>
+
+    <string name="projects_advertiser_ariz">Publicado por ARIZ</string>
+    <string name="projects_advertiser_real_estate">Inmobiliaria</string>
+    <string name="projects_advertiser_developer">Desarrollador</string>
+    <string name="projects_advertiser_architect">Arquitecto</string>
+    <string name="projects_advertiser_agent">Agente inmobiliario</string>
+    <string name="projects_advertiser_verified">Verificado por ARIZ</string>
+
+    <string name="projects_contact_whatsapp">WhatsApp</string>
+    <string name="projects_contact_call">Llamar</string>
+    <string name="projects_whatsapp_message">Hola, vi el proyecto \"%1$s\" en ARIZ y quisiera más información.</string>
+    <string name="projects_contact_message">Consultar</string>
+    <string name="projects_lead_default_message">¡Hola! Quiero que se comuniquen conmigo por este proyecto que vi en ARIZ.</string>
+</resources>
