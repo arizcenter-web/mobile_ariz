@@ -46,7 +46,7 @@ import com.tecsup.app_ariz.core.designsystem.theme.ArizColors
 import com.tecsup.app_ariz.core.designsystem.R as DesignSystemR
 
 private val CardMaxWidth = 430.dp
-private val TopBarHeight = 56.dp
+private val TopBarHeight = 72.dp
 
 /**
  * Pantalla de autenticación con el aspecto de `AuthShell` (centeredBackground) del web: foto de fondo
