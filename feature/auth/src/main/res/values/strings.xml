@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Login (textos de Ariz_Web_frontend/src/app/(auth)/login) -->
+    <string name="auth_login_eyebrow">BIENVENIDO</string>
+    <string name="auth_login_title">Iniciar sesión</string>
+    <string name="auth_login_subtitle">Ingresa con el correo asociado a tu cuenta.</string>
+    <string name="auth_login_submit">Iniciar sesión</string>
+    <string name="auth_login_google">Continuar con Google</string>
+    <string name="auth_login_or">o</string>
+    <string name="auth_login_remember_me">Recordarme</string>
+    <string name="auth_login_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="auth_login_no_account">¿Aún no tienes cuenta?</string>
+    <string name="auth_login_register_link">Registrarse</string>
+
+    <!-- Registro de cliente -->
+    <string name="auth_register_eyebrow">CREAR CUENTA</string>
+    <string name="auth_register_title">Crea tu cuenta</string>
+    <string name="auth_register_subtitle">Busca propiedades, guarda favoritos y recibe oportunidades según tus necesidades.</string>
+    <string name="auth_register_submit">Crear cuenta</string>
+    <string name="auth_register_accept_terms">Acepto los términos y condiciones</string>
+    <string name="auth_register_have_account">¿Ya tienes cuenta?</string>
+    <string name="auth_register_login_link">Iniciar sesión</string>
+    <string name="auth_register_professional_prompt">¿Eres profesional inmobiliario?</string>
+    <string name="auth_register_professional_link">Regístrate aquí</string>
+
+    <!-- Registro de profesional -->
+    <string name="auth_professional_eyebrow">CUENTA PROFESIONAL</string>
+    <string name="auth_professional_title">Registro profesional</string>
+    <string name="auth_professional_subtitle">Publica propiedades y proyectos, recibe contactos y administra tus anuncios.</string>
+    <string name="auth_professional_customer_prompt">¿Eres cliente?</string>
+    <string name="auth_professional_customer_link">Regístrate como cliente</string>
+    <string name="auth_professional_type_label">Tipo de profesional</string>
+    <string name="auth_type_independent_agent">Agente independiente</string>
+    <string name="auth_type_agency">Inmobiliaria</string>
+    <string name="auth_type_developer">Desarrolladora</string>
+
+    <!-- Recuperar contraseña -->
+    <string name="auth_forgot_eyebrow">RECUPERAR ACCESO</string>
+    <string name="auth_forgot_title">¿Olvidaste tu contraseña?</string>
+    <string name="auth_forgot_subtitle">Escribe el correo de tu cuenta y te enviaremos un enlace. Vence en 15 minutos.</string>
+    <string name="auth_forgot_submit">Enviar enlace</string>
+    <string name="auth_forgot_sent">Revisa tu correo. Si está registrado, recibirás un enlace para crear una contraseña nueva.</string>
+    <string name="auth_forgot_back_link">Volver a iniciar sesión</string>
+
+    <!-- Restablecer contraseña -->
+    <string name="auth_reset_eyebrow">CONTRASEÑA NUEVA</string>
+    <string name="auth_reset_title">Crea tu nueva contraseña</string>
+    <string name="auth_reset_subtitle">Escríbela dos veces para confirmarla.</string>
+    <string name="auth_reset_new_password">Contraseña nueva</string>
+    <string name="auth_reset_confirm_password">Confirmar contraseña</string>
+    <string name="auth_reset_submit">Cambiar contraseña</string>
+    <string name="auth_reset_done">Tu contraseña se actualizó correctamente.</string>
+    <string name="auth_reset_go_login">Iniciar sesión</string>
+
+    <!-- Campos -->
+    <string name="auth_field_first_name">Nombre</string>
+    <string name="auth_field_last_name">Apellido</string>
+    <string name="auth_field_dni">DNI</string>
+    <string name="auth_field_business_name">Razón social o nombre comercial</string>
+    <string name="auth_field_ruc">RUC</string>
+    <string name="auth_field_email">Correo</string>
+    <string name="auth_field_phone">Teléfono</string>
+    <string name="auth_field_whatsapp">WhatsApp</string>
+    <string name="auth_field_city">Ciudad</string>
+    <string name="auth_field_districts">Distritos de cobertura</string>
+    <string name="auth_field_address">Dirección</string>
+    <string name="auth_field_website">Sitio web</string>
+    <string name="auth_field_social_links">Redes sociales</string>
+    <string name="auth_field_password">Contraseña</string>
+    <string name="auth_field_optional_suffix">(opcional)</string>
+    <string name="auth_placeholder_email">correo@ejemplo.com</string>
+    <string name="auth_placeholder_password">*********</string>
+
+    <!-- Errores de validación -->
+    <string name="auth_error_required">Este campo es obligatorio</string>
+    <string name="auth_error_invalid_email">Ingresa un correo válido</string>
+    <string name="auth_error_invalid_phone">El teléfono debe tener entre 7 y 20 caracteres</string>
+    <string name="auth_error_invalid_dni">El DNI debe tener 8 dígitos</string>
+    <string name="auth_error_invalid_ruc">El RUC debe tener 11 dígitos</string>
+    <string name="auth_error_weak_password">Entre 8 y 72 caracteres, con letras y números</string>
+    <string name="auth_error_passwords_mismatch">Las contraseñas no coinciden</string>
+    <string name="auth_error_terms">Debes aceptar los términos y condiciones</string>
+</resources>
