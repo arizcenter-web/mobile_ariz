@@ -48,11 +48,11 @@ dependencies {
     implementation(project(":feature:listings"))
     implementation(project(":feature:projects"))
     implementation(project(":feature:favorites"))
-    implementation(project(":feature:leads"))
-    implementation(project(":feature:alerts"))
     implementation(project(":feature:agents"))
     implementation(project(":feature:account"))
     implementation(project(":feature:rewards"))
+    implementation(project(":feature:investments"))
+    implementation(project(":feature:info"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
