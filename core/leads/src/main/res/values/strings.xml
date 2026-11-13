@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Formulario de consulta (Ariz_Web_frontend/src/features/leads/components/lead-form.tsx) -->
+    <string name="leads_title">Contacta al anunciante</string>
+    <string name="leads_field_email">Correo</string>
+    <string name="leads_field_name">Nombre</string>
+    <string name="leads_field_phone">Teléfono</string>
+    <string name="leads_field_dni">DNI (opcional)</string>
+    <string name="leads_field_message">Mensaje</string>
+    <string name="leads_terms">Acepto los Términos y Condiciones de Uso y las políticas de privacidad.</string>
+    <string name="leads_submit">Enviar consulta</string>
+    <string name="leads_error_required">Este campo es obligatorio</string>
+    <string name="leads_error_invalid_email">Ingresa un correo válido</string>
+    <string name="leads_error_terms">Debes aceptar los términos y condiciones</string>
+    <string name="leads_error_send">No pudimos enviar tu consulta. Inténtalo nuevamente.</string>
+
+    <string name="leads_success_title">¡Mensaje enviado correctamente!</string>
+    <string name="leads_success_description">El contacto de la publicación recibirá tu consulta y se comunicará contigo.</string>
+    <string name="leads_success_action">Entendido</string>
+</resources>
