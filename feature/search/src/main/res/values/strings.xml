@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Filtros (Ariz_Web_frontend/src/features/listings/components/property-filters-bar.tsx) -->
+    <string name="search_district_label">Distrito</string>
+    <string name="search_district_placeholder">Buscar por distrito</string>
+    <string name="search_operation_label">Operación</string>
+    <string name="search_operation_buy">Comprar</string>
+    <string name="search_operation_rent">Alquilar</string>
+    <string name="search_type_label">Tipo de propiedad</string>
+    <string name="search_type_all">Todos los tipos</string>
+    <string name="search_type_houses">Casas</string>
+    <string name="search_type_apartments">Departamentos</string>
+    <string name="search_type_land">Terrenos</string>
+    <string name="search_type_commercial">Locales comerciales</string>
+    <string name="search_rooms_label">Dormitorios</string>
+    <string name="search_rooms_any">Cualquiera</string>
+    <string name="search_rooms_min">%1$d o más</string>
+    <string name="search_more_filters">Más filtros</string>
+    <string name="search_fewer_filters">Menos filtros</string>
+    <string name="search_price_min">Precio mínimo (S/)</string>
+    <string name="search_price_max">Precio máximo (S/)</string>
+    <string name="search_area_min">Área mínima (m²)</string>
+    <string name="search_apply">Aplicar</string>
+
+    <!-- Resultados -->
+    <string name="search_heading">Propiedades</string>
+    <string name="search_total">%1$d propiedades disponibles</string>
+    <string name="search_total_one">1 propiedad disponible</string>
+    <string name="search_sort_label">Ordenar resultados</string>
+    <string name="search_sort_recent">Más recientes</string>
+    <string name="search_sort_price_asc">Precio: menor a mayor</string>
+    <string name="search_sort_price_desc">Precio: mayor a menor</string>
+    <string name="search_empty">No encontramos propiedades con esos filtros.</string>
+    <string name="search_retry">Reintentar</string>
+</resources>

@@ -10,6 +10,12 @@ import kotlinx.serialization.Serializable
 data object SearchRoute
 
 /** Punto de entrada publico de la feature: :app solo conoce esta funcion. */
-fun NavGraphBuilder.searchScreen(modifier: Modifier = Modifier) {
-    composable<SearchRoute> { SearchScreen(modifier) }
+fun NavGraphBuilder.searchScreen(
+    onPropertyClick: (slug: String) -> Unit,
+    onLoginRequired: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    composable<SearchRoute> {
+        SearchScreen(onPropertyClick = onPropertyClick, onLoginRequired = onLoginRequired, modifier = modifier)
+    }
 }
