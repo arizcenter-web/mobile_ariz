@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_signed_out_title">Mi cuenta</string>
+    <string name="account_signed_out_description">Inicia sesión para guardar favoritos, contactar agentes y gestionar tus alertas.</string>
+    <string name="account_sign_in">Iniciar sesión</string>
+    <string name="account_sign_out">Cerrar sesión</string>
+    <string name="account_role_admin">Administrador</string>
+    <string name="account_role_user">Cliente</string>
+    <string name="account_role_real_estate">Profesional inmobiliario</string>
+</resources>
