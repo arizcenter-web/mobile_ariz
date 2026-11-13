@@ -5,6 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -60,6 +63,9 @@ internal enum class HomeCategory(
     RENT(R.string.home_category_rent_label, R.string.home_category_rent_subtitle, Icons.Outlined.Key, HomeDestination.SEARCH),
 }
 
+private val CardGutter = 16.dp
+private val CardSpacing = 12.dp
+
 /** Título "¿Qué quieres hacer hoy?" y fila deslizable de tarjetas azules (`category-showcase.tsx`). */
 @Composable
 internal fun CategoryShowcase(
@@ -90,13 +96,19 @@ internal fun CategoryShowcase(
                 color = ArizColors.Muted,
             )
         }
+        // Exactamente dos tarjetas por pantalla: (ancho - márgenes - separación) / 2. Así no asoma
+        // un pedazo de la tercera, y el "imán" detiene el deslizamiento justo en cada par.
+        val cardWidth = (LocalConfiguration.current.screenWidthDp.dp - CardGutter * 2 - CardSpacing) / 2
+        val listState = rememberLazyListState()
         LazyRow(
+            state = listState,
             modifier = Modifier.padding(top = 20.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(horizontal = CardGutter),
+            horizontalArrangement = Arrangement.spacedBy(CardSpacing),
+            flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
         ) {
             items(HomeCategory.entries, key = { it.name }) { category ->
-                CategoryCard(category = category, onClick = { onCategoryClick(category) })
+                CategoryCard(category = category, onClick = { onCategoryClick(category) }, modifier = Modifier.width(cardWidth))
             }
         }
     }
@@ -107,13 +119,12 @@ private fun CategoryCard(category: HomeCategory, onClick: () -> Unit, modifier: 
     val shape = RoundedCornerShape(6.dp)
     Column(
         modifier = modifier
-            .width(175.dp)
             .height(144.dp)
             .shadow(8.dp, shape, clip = false)
             .background(ArizColors.Brand, shape)
             .border(1.dp, ArizColors.Brand, shape)
             .clickable(role = Role.Button, onClick = onClick)
-            .padding(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 12.dp),
+            .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
