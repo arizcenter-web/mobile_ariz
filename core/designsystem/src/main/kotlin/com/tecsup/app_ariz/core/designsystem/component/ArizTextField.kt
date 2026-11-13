@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -60,6 +60,9 @@ fun ArizTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Next,
     onImeAction: () -> Unit = {},
+    /** Con `false` el campo crece con el texto (mínimo [minLines] líneas): mensajes y descripciones. */
+    singleLine: Boolean = true,
+    minLines: Int = 1,
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
@@ -82,7 +85,7 @@ fun ArizTextField(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(44.dp)
+                .heightIn(min = 44.dp)
                 .alpha(if (enabled) 1f else 0.6f)
                 .clip(shape)
                 .background(colors.surfaceVariant)
@@ -94,9 +97,10 @@ fun ArizTextField(
                 BasicTextField(
                     value = value,
                     onValueChange = onValueChange,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(vertical = if (singleLine) 0.dp else 12.dp),
                     enabled = enabled,
-                    singleLine = true,
+                    singleLine = singleLine,
+                    minLines = if (singleLine) 1 else minLines,
                     textStyle = MaterialTheme.typography.bodyMedium.copy(color = colors.onSurface),
                     cursorBrush = SolidColor(colors.primary),
                     visualTransformation = if (isPassword && !passwordVisible) {

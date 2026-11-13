@@ -25,6 +25,12 @@ object ArizColors {
     val Edge = Color(0xFFDDE1EC)         // --edge (bordes)
     val FieldBorder = Color(0xFF8793AD)  // borde de los campos de formulario (login-form.tsx)
 
+    // Secciones del home del web (features/home/components): fondo, títulos y texto de apoyo.
+    val SectionCanvas = Color(0xFFF3F4F8)  // bg-[#F3F4F8]
+    val Heading = Color(0xFF071A5A)        // text-[#071A5A]
+    val BodyMuted = Color(0xFF596273)      // text-[#596273]
+    val HeroShade = Color(0xFF040F34)      // rgb(4 15 52), velo del hero
+
     val Ink = Color(0xFF0B1437)          // --ink (texto principal)
     val Muted = Color(0xFF646D8A)        // --muted (texto secundario)
 
