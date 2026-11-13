@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Perfil de agente (Ariz_Web_frontend/src/app/(public)/agentes/[id]/page.tsx) -->
+    <string name="agents_back">Volver</string>
+    <string name="agents_retry">Reintentar</string>
+    <string name="agents_badge_advertiser">Anunciante ARIZ</string>
+    <string name="agents_badge_verified">Verificado</string>
+    <string name="agents_role_with_zone">Agente inmobiliario · %1$s</string>
+    <string name="agents_role">Agente inmobiliario</string>
+    <string name="agents_stat_property_one">propiedad activa</string>
+    <string name="agents_stat_property_many">propiedades activas</string>
+    <string name="agents_stat_zone">zona de atención</string>
+    <string name="agents_stat_whatsapp">WhatsApp</string>
+
+    <string name="agents_contact_eyebrow">CONTACTO DIRECTO</string>
+    <string name="agents_contact_title">Habla con %1$s</string>
+    <string name="agents_contact_description">Pide información, agenda una visita o consulta detalles de sus inmuebles publicados.</string>
+    <string name="agents_contact_whatsapp">WhatsApp</string>
+    <string name="agents_contact_call">Llamar</string>
+    <string name="agents_contact_email">Escribir un correo</string>
+    <string name="agents_whatsapp_message">Hola %1$s, vi tu perfil en ARIZ y quisiera más información.</string>
+
+    <string name="agents_portfolio_eyebrow">PORTAFOLIO</string>
+    <string name="agents_portfolio_title">Propiedades publicadas</string>
+    <string name="agents_portfolio_count_one">1 resultado disponible</string>
+    <string name="agents_portfolio_count_many">%1$d resultados disponibles</string>
+    <string name="agents_portfolio_empty">Este anunciante aún no tiene propiedades publicadas.</string>
+</resources>
