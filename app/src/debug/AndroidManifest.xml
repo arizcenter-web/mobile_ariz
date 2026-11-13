@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Solo debug: el backend local (http://10.0.2.2:4000) no tiene HTTPS. -->
+    <application
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m" />
+
+</manifest>

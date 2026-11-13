@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mismos valores que Ariz_Web_frontend/src/shared/styles/tokens.css -->
+    <color name="ariz_brand">#FF00124F</color>
+    <color name="ariz_canvas">#FFF5F6FA</color>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App_ariz" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/ariz_brand</item>
+        <item name="android:windowBackground">@color/ariz_canvas</item>
+    </style>
+
+    <!-- Tema de arranque: splash con el azul de marca; luego pasa a Theme.App_ariz. -->
+    <style name="Theme.App_ariz.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/ariz_brand</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.App_ariz</item>
+    </style>
+</resources>
