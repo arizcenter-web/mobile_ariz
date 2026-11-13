@@ -40,6 +40,7 @@ class SearchViewModel @Inject constructor(
             is SearchAction.PriceMaxChanged -> _state.update { it.copy(priceMaxText = action.value.digitsOnly()) }
             is SearchAction.AreaMinChanged -> _state.update { it.copy(areaMinText = action.value.digitsOnly()) }
             SearchAction.ToggleMoreFilters -> _state.update { it.copy(showMoreFilters = !it.showMoreFilters) }
+            SearchAction.ClearFilters -> clearFilters()
             SearchAction.ApplyMoreFilters -> applyFilters { it }
             SearchAction.LoadMore -> loadMore()
             SearchAction.Retry -> if (_state.value.items.isEmpty()) search(_state.value.filters) else loadMore()
@@ -56,6 +57,12 @@ class SearchViewModel @Inject constructor(
             areaMin = current.areaMinText.toIntOrNull(),
         )
         search(next)
+    }
+
+    /** Vuelve a la búsqueda inicial: sin filtros, sin textos escritos y con el orden por defecto. */
+    private fun clearFilters() {
+        _state.update { it.copy(districtText = "", priceMinText = "", priceMaxText = "", areaMinText = "") }
+        search(PropertyFilters())
     }
 
     private fun search(filters: PropertyFilters) {

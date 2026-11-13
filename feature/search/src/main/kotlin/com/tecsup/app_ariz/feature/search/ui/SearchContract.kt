@@ -26,7 +26,12 @@ data class SearchUiState(
     /** Siguiente página: se muestra el indicador al final de la lista. */
     val isLoadingMore: Boolean = false,
     val error: AppError? = null,
-)
+) {
+    /** Hay algún filtro distinto del inicial: se ofrece "Limpiar filtros" en el estado vacío. */
+    val hasActiveFilters: Boolean
+        get() = filters != PropertyFilters() ||
+            districtText.isNotBlank() || priceMinText.isNotEmpty() || priceMaxText.isNotEmpty() || areaMinText.isNotEmpty()
+}
 
 sealed interface SearchAction {
     data class DistrictChanged(val value: String) : SearchAction
@@ -39,6 +44,7 @@ sealed interface SearchAction {
     data class PriceMaxChanged(val value: String) : SearchAction
     data class AreaMinChanged(val value: String) : SearchAction
     data object ToggleMoreFilters : SearchAction
+    data object ClearFilters : SearchAction
     data object ApplyMoreFilters : SearchAction
     data object LoadMore : SearchAction
     data object Retry : SearchAction

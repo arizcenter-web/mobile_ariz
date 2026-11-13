@@ -20,7 +20,8 @@
     <string name="search_price_min">Precio mínimo (S/)</string>
     <string name="search_price_max">Precio máximo (S/)</string>
     <string name="search_area_min">Área mínima (m²)</string>
-    <string name="search_apply">Aplicar</string>
+    <string name="search_apply">Buscar</string>
+    <string name="search_clear">Limpiar</string>
 
     <!-- Resultados -->
     <string name="search_heading">Propiedades</string>
@@ -30,6 +31,12 @@
     <string name="search_sort_recent">Más recientes</string>
     <string name="search_sort_price_asc">Precio: menor a mayor</string>
     <string name="search_sort_price_desc">Precio: mayor a menor</string>
-    <string name="search_empty">No encontramos propiedades con esos filtros.</string>
+    <string name="search_hero_eyebrow">ENCUENTRA TU PROPIEDAD</string>
+    <string name="search_hero_subtitle">Filtra por ubicación, tipo, precio y más.</string>
+    <string name="search_empty_title">No encontramos propiedades</string>
+    <string name="search_empty_filtered">Prueba con otros filtros o quítalos para ver más resultados.</string>
+    <string name="search_empty_clear">Limpiar filtros</string>
+    <string name="search_empty_no_data_title">Aún no hay propiedades publicadas</string>
+    <string name="search_empty_no_data">Vuelve pronto: estamos sumando nuevas propiedades. Mientras tanto, mira nuestros proyectos desde Inicio.</string>
     <string name="search_retry">Reintentar</string>
 </resources>

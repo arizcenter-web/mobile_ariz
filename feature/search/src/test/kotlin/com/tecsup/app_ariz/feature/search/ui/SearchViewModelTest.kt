@@ -135,6 +135,26 @@ class SearchViewModelTest {
     }
 
     @Test
+    fun `limpiar filtros vuelve a la busqueda inicial y borra los textos escritos`() {
+        val viewModel = viewModel()
+        assertFalse(viewModel.state.value.hasActiveFilters)
+
+        viewModel.onAction(SearchAction.TypeChanged(PropertyTypeFilter.HOUSE))
+        viewModel.onAction(SearchAction.DistrictChanged("Zarumilla"))
+        viewModel.onAction(SearchAction.PriceMinChanged("500"))
+        assertTrue(viewModel.state.value.hasActiveFilters)
+
+        viewModel.onAction(SearchAction.ClearFilters)
+
+        val state = viewModel.state.value
+        assertFalse(state.hasActiveFilters)
+        assertEquals("", state.districtText)
+        assertEquals("", state.priceMinText)
+        assertEquals(PropertyFilters(), catalog.calls.last().first)
+        assertEquals(1, catalog.calls.last().second)
+    }
+
+    @Test
     fun `cambiar el orden se envia al backend`() {
         val viewModel = viewModel()
 

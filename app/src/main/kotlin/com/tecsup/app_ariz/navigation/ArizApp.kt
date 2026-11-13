@@ -89,7 +89,8 @@ fun ArizApp(viewModel: MainViewModel = hiltViewModel()) {
         currentDestination?.hierarchy?.any { it.hasRoute(destination.routeClass) } == true
     }
 
-    val isHome = currentDestination?.hierarchy?.any { it.hasRoute(HomeRoute::class) } == true
+    // Inicio y Buscar tienen una cabecera que llega hasta arriba: solo respetan la barra inferior.
+    val isHome = currentDestination?.hierarchy?.any { it.hasRoute(HomeRoute::class) || it.hasRoute(SearchRoute::class) } == true
 
     val openProperty: (String) -> Unit = { slug -> navController.navigate(PropertyDetailRoute(slug)) }
     val openAgent: (String) -> Unit = { id -> navController.navigate(AgentProfileRoute(id)) }

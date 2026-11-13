@@ -1,6 +1,17 @@
 package com.tecsup.app_ariz.feature.search.ui
 
 import androidx.compose.foundation.BorderStroke
+import com.tecsup.app_ariz.core.ui.LightStatusBarIcons
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.outlined.SearchOff
+import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,6 +73,7 @@ fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LightStatusBarIcons()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val favorites = rememberFavorites(
@@ -109,16 +121,17 @@ fun SearchContent(
 
     LazyColumn(
         state = listState,
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas),
+        contentPadding = PaddingValues(bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        item(key = "filters") { FiltersCard(state = state, onAction = onAction) }
-        item(key = "header") { ResultsHeader(state = state, onAction = onAction) }
+        item(key = "hero") { SearchHero() }
+        item(key = "filters") { FiltersCard(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp)) }
+        item(key = "header") { ResultsHeader(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp)) }
 
         when {
             state.isLoading -> item(key = "loading") {
-                Box(Modifier.fillMaxWidth().height(200.dp), contentAlignment = Alignment.Center) {
+                Box(Modifier.fillMaxWidth().height(160.dp), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator(color = ArizColors.Brand)
                 }
             }
@@ -127,7 +140,13 @@ fun SearchContent(
                 MessageWithRetry(message = state.error.message, onRetry = { onAction(SearchAction.Retry) })
             }
 
-            state.items.isEmpty() -> item(key = "empty") { EmptyResults() }
+            state.items.isEmpty() -> item(key = "empty") {
+                EmptyResults(
+                    hasActiveFilters = state.hasActiveFilters,
+                    onClearFilters = { onAction(SearchAction.ClearFilters) },
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                )
+            }
 
             else -> {
                 items(state.items, key = { it.id }) { property ->
@@ -138,6 +157,7 @@ fun SearchContent(
                         onContactClick = { onPropertyClick(property.slug) },
                         isFavorite = favorites.isFavorite(property.id),
                         onFavoriteClick = { favorites.onToggle(property.id) },
+                        modifier = Modifier.padding(horizontal = 16.dp),
                     )
                 }
                 if (state.isLoadingMore) item(key = "more") {
@@ -155,15 +175,15 @@ fun SearchContent(
 
 /** `PropertyFiltersBar` del web: distrito, operación, tipo, dormitorios y "Más filtros". */
 @Composable
-private fun FiltersCard(state: SearchUiState, onAction: (SearchAction) -> Unit) {
+private fun FiltersCard(state: SearchUiState, onAction: (SearchAction) -> Unit, modifier: Modifier = Modifier) {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
         color = MaterialTheme.colorScheme.surface,
         border = BorderStroke(1.dp, ArizColors.Edge),
-        shadowElevation = 2.dp,
+        shadowElevation = 6.dp,
     ) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             ArizTextField(
                 value = state.districtText,
                 onValueChange = { onAction(SearchAction.DistrictChanged(it)) },
@@ -200,7 +220,7 @@ private fun FiltersCard(state: SearchUiState, onAction: (SearchAction) -> Unit) 
             )
 
             if (state.showMoreFilters) {
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         ArizTextField(
                             value = state.priceMinText,
@@ -229,33 +249,73 @@ private fun FiltersCard(state: SearchUiState, onAction: (SearchAction) -> Unit) 
                 }
             }
 
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                ArizSecondaryButton(
-                    onClick = { onAction(SearchAction.ToggleMoreFilters) },
-                    modifier = Modifier.weight(1f),
-                ) {
+            ArizPrimaryButton(
+                text = stringResource(R.string.search_apply),
+                onClick = { onAction(SearchAction.ApplyMoreFilters) },
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = stringResource(if (state.showMoreFilters) R.string.search_fewer_filters else R.string.search_more_filters),
+                    modifier = Modifier.clickable { onAction(SearchAction.ToggleMoreFilters) }.padding(vertical = 6.dp),
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+                    color = ArizColors.Brand,
+                )
+                if (state.hasActiveFilters) {
                     Text(
-                        text = stringResource(
-                            if (state.showMoreFilters) R.string.search_fewer_filters else R.string.search_more_filters,
-                        ),
-                        fontWeight = FontWeight.Bold,
-                        color = ArizColors.Brand,
+                        text = stringResource(R.string.search_clear),
+                        modifier = Modifier.clickable { onAction(SearchAction.ClearFilters) }.padding(vertical = 6.dp),
+                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+                        color = ArizColors.Muted,
                     )
                 }
-                ArizPrimaryButton(
-                    text = stringResource(R.string.search_apply),
-                    onClick = { onAction(SearchAction.ApplyMoreFilters) },
-                    modifier = Modifier.weight(1f),
-                )
             }
         }
     }
 }
 
+/** Cabecera azul de la pestaña: dibuja bajo la barra de estado y deja respirar la tarjeta de filtros. */
 @Composable
-private fun ResultsHeader(state: SearchUiState, onAction: (SearchAction) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Column {
+private fun SearchHero() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(ArizColors.Brand)
+            .statusBarsPadding()
+            .padding(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.search_hero_eyebrow),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Black, letterSpacing = 1.8.sp),
+            color = ArizColors.Accent,
+        )
+        Text(
+            text = stringResource(R.string.search_heading),
+            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Black),
+            color = Color.White,
+        )
+        Text(
+            text = stringResource(R.string.search_hero_subtitle),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.White.copy(alpha = 0.8f),
+        )
+    }
+}
+
+@Composable
+private fun ResultsHeader(state: SearchUiState, onAction: (SearchAction) -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(
+                text = state.filters.type?.let { typeLabel(it) } ?: stringResource(R.string.search_heading),
+                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Black),
+                color = ArizColors.Brand,
+            )
             if (!state.isLoading) {
                 Text(
                     text = if (state.total == 1) {
@@ -263,15 +323,10 @@ private fun ResultsHeader(state: SearchUiState, onAction: (SearchAction) -> Unit
                     } else {
                         stringResource(R.string.search_total, state.total)
                     },
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
                     color = ArizColors.Muted,
                 )
             }
-            Text(
-                text = state.filters.type?.let { typeLabel(it) } ?: stringResource(R.string.search_heading),
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
-                color = ArizColors.Ink,
-            )
         }
         ArizDropdownField(
             label = stringResource(R.string.search_sort_label),
@@ -284,28 +339,56 @@ private fun ResultsHeader(state: SearchUiState, onAction: (SearchAction) -> Unit
     }
 }
 
+/**
+ * Sin resultados. Con filtros activos se ofrece limpiarlos; sin filtros significa que todavía no hay
+ * propiedades publicadas, y se dice tal cual en lugar de culpar a los filtros.
+ */
 @Composable
-private fun EmptyResults() {
+private fun EmptyResults(hasActiveFilters: Boolean, onClearFilters: () -> Unit, modifier: Modifier = Modifier) {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
-        color = ArizColors.SurfaceMuted,
+        color = MaterialTheme.colorScheme.surface,
         border = BorderStroke(1.dp, ArizColors.Edge),
     ) {
-        Text(
-            text = stringResource(R.string.search_empty),
-            modifier = Modifier.padding(32.dp),
-            style = MaterialTheme.typography.bodyMedium,
-            color = ArizColors.Muted,
-            textAlign = TextAlign.Center,
-        )
+        Column(
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Box(
+                modifier = Modifier.size(64.dp).background(ArizColors.BrandSoft, CircleShape),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(Icons.Outlined.SearchOff, contentDescription = null, modifier = Modifier.size(30.dp), tint = ArizColors.Brand)
+            }
+            Text(
+                text = stringResource(if (hasActiveFilters) R.string.search_empty_title else R.string.search_empty_no_data_title),
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Black),
+                color = ArizColors.Brand,
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                text = stringResource(if (hasActiveFilters) R.string.search_empty_filtered else R.string.search_empty_no_data),
+                style = MaterialTheme.typography.bodyMedium,
+                color = ArizColors.Muted,
+                textAlign = TextAlign.Center,
+            )
+            if (hasActiveFilters) {
+                ArizPrimaryButton(
+                    text = stringResource(R.string.search_empty_clear),
+                    onClick = onClearFilters,
+                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                )
+            }
+        }
     }
 }
 
 @Composable
 private fun MessageWithRetry(message: String, onRetry: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
