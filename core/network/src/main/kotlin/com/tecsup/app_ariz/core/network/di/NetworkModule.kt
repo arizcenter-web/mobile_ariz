@@ -67,6 +67,12 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(BuildConfig.API_BASE_URL)
             .client(client)
-            .addConverterFactory(json.asConverterFactory("application/json; charset=UTF8".toMediaType()))
+            .addConverterFactory(json.asConverterFactory(JsonMediaType))
             .build()
 }
+
+/**
+ * Tipo de contenido de las peticiones JSON. El charset se escribe `UTF-8` (con guion): el `body-parser`
+ * de Express del backend rechaza `UTF8` con un 415 "unsupported charset" antes de leer el cuerpo.
+ */
+internal val JsonMediaType = "application/json; charset=UTF-8".toMediaType()
