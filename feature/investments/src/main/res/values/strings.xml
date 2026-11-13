@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Inversión Ariz (Ariz_Web_frontend/src/app/(public)/inversiones) -->
+    <string name="investments_back">Volver</string>
+    <string name="investments_retry">Reintentar</string>
+    <string name="investments_hero_title">Invierte en oportunidades inmobiliarias con criterio y respaldo</string>
+    <string name="investments_hero_subtitle">Evalúa tu capital, identifica oportunidades compatibles y conversa con un asesor para evaluar la mejor ruta de inversión.</string>
+    <string name="investments_hero_advisor">Hablar con un asesor</string>
+    <string name="investments_whatsapp_general">Hola ARIZ Proyectos, quiero cotizar el servicio de inversión inmobiliaria para mi proyecto inmobiliario</string>
+
+    <string name="investments_sim_eyebrow">EVALUADOR</string>
+    <string name="investments_sim_title">Calculadora de inversión</string>
+    <string name="investments_sim_capital">Capital disponible</string>
+    <string name="investments_sim_term">Plazo deseado</string>
+    <string name="investments_sim_months">%1$d meses</string>
+    <string name="investments_sim_goal">Objetivo</string>
+    <string name="investments_sim_result">RETORNO ESTIMADO</string>
+    <string name="investments_sim_note">Cálculo referencial según el plazo y las oportunidades compatibles.</string>
+
+    <string name="investments_goal_plusvalia">Plusvalía</string>
+    <string name="investments_goal_construccion">Construcción</string>
+    <string name="investments_goal_renta">Renta futura</string>
+
+    <string name="investments_catalog_eyebrow">CATÁLOGO EXCLUSIVO</string>
+    <string name="investments_catalog_title">Oportunidades de inversión</string>
+    <string name="investments_types_title">Elige una categoría</string>
+    <string name="investments_types_all">Todas</string>
+    <string name="investments_empty">No hay oportunidades publicadas para este tipo de inversión.</string>
+    <string name="investments_compatible">Compatible con tu capital</string>
+
+    <string name="investments_status_available">Disponible</string>
+    <string name="investments_status_coming_soon">Próximamente</string>
+    <string name="investments_status_closed">Cerrada</string>
+    <string name="investments_risk_low">Bajo</string>
+    <string name="investments_risk_medium">Medio</string>
+    <string name="investments_risk_high">Alto</string>
+    <string name="investments_risk_label">Riesgo %1$s</string>
+
+    <string name="investments_metric_area">Metraje</string>
+    <string name="investments_metric_initial">Inicial desde</string>
+    <string name="investments_metric_term">Plazo</string>
+    <string name="investments_metric_risk">Riesgo</string>
+    <string name="investments_metric_asset">Activo</string>
+    <string name="investments_metric_roi">ROI estimado</string>
+    <string name="investments_metric_initial_investment">Inversión inicial</string>
+    <string name="investments_term_months">%1$d meses</string>
+    <string name="investments_card_view">Detalle</string>
+    <string name="investments_card_contact">Contacto</string>
+
+    <string name="investments_detail_eyebrow">OPORTUNIDAD DE INVERSIÓN · %1$s</string>
+    <string name="investments_detail_about">Sobre esta inversión</string>
+    <string name="investments_detail_highlights">Puntos destacados</string>
+    <string name="investments_detail_location">Ubicación del proyecto</string>
+    <string name="investments_detail_open_maps">Abrir ubicación exacta</string>
+    <string name="investments_detail_more">¿Quieres conocer más?</string>
+    <string name="investments_detail_cta_default">Consultar por WhatsApp</string>
+    <string name="investments_detail_disclaimer">El ROI publicado es referencial. Solicita a un asesor los detalles y condiciones vigentes.</string>
+    <string name="investments_detail_whatsapp">Hola ARIZ Proyectos, quiero cotizar el servicio de información del proyecto de inversión %1$s para mi proyecto inmobiliario</string>
+    <string name="investments_roi_label">%1$s%% ROI</string>
+</resources>
