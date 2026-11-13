@@ -9,7 +9,27 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object HomeRoute
 
+/**
+ * Lugares a los que el inicio puede llevar al usuario. Home no conoce las demás features: solo
+ * pide ir a un destino y `:app` decide a qué pantalla corresponde.
+ */
+enum class HomeDestination { SEARCH, PROJECTS, SELL, REWARDS, INVESTMENTS, BUILD }
+
 /** Punto de entrada publico de la feature: :app solo conoce esta funcion. */
-fun NavGraphBuilder.homeScreen(modifier: Modifier = Modifier) {
-    composable<HomeRoute> { HomeScreen(modifier) }
+fun NavGraphBuilder.homeScreen(
+    onDestinationClick: (HomeDestination) -> Unit,
+    onPropertyClick: (slug: String) -> Unit,
+    onProjectClick: (slug: String) -> Unit,
+    onLoginRequired: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    composable<HomeRoute> {
+        HomeScreen(
+            onDestinationClick = onDestinationClick,
+            onPropertyClick = onPropertyClick,
+            onProjectClick = onProjectClick,
+            onLoginRequired = onLoginRequired,
+            modifier = modifier,
+        )
+    }
 }
