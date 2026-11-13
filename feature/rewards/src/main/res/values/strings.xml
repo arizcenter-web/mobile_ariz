@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ariz Club (Ariz_Web_frontend/src/app/(public)/rewards/page.tsx) -->
+    <string name="rewards_back">Volver</string>
+    <string name="rewards_retry">Reintentar</string>
+
+    <!-- Paso 1: código -->
+    <string name="rewards_code_badge">PROGRAMA DE REFERENTES</string>
+    <string name="rewards_code_tagline">Recomienda. Suma. Disfruta.</string>
+    <string name="rewards_code_title">Compartir buenas oportunidades tiene recompensa.</string>
+    <string name="rewards_code_subtitle">Ingresa con tu código, descubre tus puntos y canjéalos por beneficios exclusivos.</string>
+    <string name="rewards_code_card_eyebrow">TU ESPACIO EXCLUSIVO</string>
+    <string name="rewards_code_card_title">Catálogo de recompensas</string>
+    <string name="rewards_code_card_description">Accede a tus beneficios con el código de referente que recibiste de Ariz.</string>
+    <string name="rewards_code_label">Código de referente</string>
+    <string name="rewards_code_placeholder">APCOD-XXXXXXXX</string>
+    <string name="rewards_code_submit">Acceder al catálogo</string>
+    <string name="rewards_code_note">Tu código es personal. Tus puntos y recompensas estarán disponibles al validar tu acceso.</string>
+    <string name="rewards_code_join">¿Aún no eres parte del club? Únete al Ariz Club</string>
+
+    <!-- Paso 2: club -->
+    <string name="rewards_hero_greeting">Hola, %1$s</string>
+    <string name="rewards_hero_points">%1$s puntos</string>
+    <string name="rewards_hero_points_label">Tus puntos disponibles</string>
+    <string name="rewards_hero_campaign_points">%1$s puntos de campaña</string>
+    <string name="rewards_hero_code">Tu código: %1$s</string>
+    <string name="rewards_action_share">Compartir</string>
+    <string name="rewards_action_refer">Referir nuevo</string>
+    <string name="rewards_action_leave">Salir</string>
+    <string name="rewards_share_text">Hola, %1$s te invita a descubrir nuevas oportunidades inmobiliarias con Ariz. Únete con mi código %2$s en Ariz.</string>
+    <string name="rewards_share_title">Ariz Club</string>
+    <string name="rewards_banner_empty_title">¡Empieza a referir!</string>
+    <string name="rewards_banner_title">¡Sigue refiriendo!</string>
+    <string name="rewards_banner_text">Registra referidos con tu código %1$s para seguir sumando puntos y desbloquear más recompensas.</string>
+
+    <string name="rewards_campaigns_title">Mis puntos de campaña</string>
+    <string name="rewards_campaigns_empty">Aún no tienes puntos de campaña.</string>
+    <string name="rewards_campaigns_total">%1$d pts</string>
+
+    <string name="rewards_catalog_title">Catálogo de recompensas</string>
+    <string name="rewards_catalog_empty">Por ahora no hay premios disponibles.</string>
+    <string name="rewards_incentive_points">%1$s puntos</string>
+    <string name="rewards_incentive_stock">Quedan %1$d</string>
+    <string name="rewards_incentive_redeem">Canjear</string>
+    <string name="rewards_incentive_missing">Te faltan %1$s puntos</string>
+
+    <string name="rewards_redeem_dialog_title">Confirmar canje</string>
+    <string name="rewards_redeem_dialog_text">¿Canjear \"%1$s\" por %2$s puntos?</string>
+    <string name="rewards_redeem_dialog_confirm">Canjear</string>
+    <string name="rewards_redeem_dialog_cancel">Cancelar</string>
+    <string name="rewards_redeem_success_title">¡Canje solicitado!</string>
+    <string name="rewards_redeem_success_text">Tu solicitud fue registrada. Te avisaremos cuando sea aprobada.</string>
+    <string name="rewards_redeem_failure_title">No se pudo canjear</string>
+    <string name="rewards_ok">Entendido</string>
+
+    <string name="rewards_redemptions_title">Mis canjes</string>
+    <string name="rewards_redemptions_empty">Todavía no has canjeado premios.</string>
+    <string name="rewards_status_pending">Pendiente</string>
+    <string name="rewards_status_approved">Aprobado</string>
+    <string name="rewards_status_rejected">Rechazado</string>
+    <string name="rewards_status_delivered">Entregado</string>
+    <string name="rewards_status_cancelled">Cancelado</string>
+
+    <!-- Formulario de referidos (referral-modal.tsx) -->
+    <string name="rewards_referral_title_member">Referir a alguien</string>
+    <string name="rewards_referral_title_new">Únete al Ariz Club</string>
+    <string name="rewards_referral_you">Tus datos</string>
+    <string name="rewards_referral_person">Datos de la persona que refieres</string>
+    <string name="rewards_referral_name">Nombre</string>
+    <string name="rewards_referral_email">Correo</string>
+    <string name="rewards_referral_phone">Celular (9 dígitos)</string>
+    <string name="rewards_referral_interest">¿Qué le interesa?</string>
+    <string name="rewards_referral_availability">Disponibilidad (opcional)</string>
+    <string name="rewards_referral_availability_none">Sin especificar</string>
+    <string name="rewards_referral_submit">Enviar referido</string>
+    <string name="rewards_referral_success_title">¡Referido registrado!</string>
+    <string name="rewards_referral_success_text">Gracias por recomendar a Ariz. Si eres nuevo en el club, te enviaremos tu código por correo.</string>
+    <string name="rewards_error_required">Este campo es obligatorio</string>
+    <string name="rewards_error_email">Ingresa un correo válido</string>
+    <string name="rewards_error_phone">Ingresa un celular de 9 dígitos que empiece con 9</string>
+    <string name="rewards_error_interest">Elige un interés</string>
+
+    <string name="rewards_interest_venta">Venta</string>
+    <string name="rewards_interest_compra">Compra</string>
+    <string name="rewards_interest_alquiler">Alquilar</string>
+    <string name="rewards_interest_compra_lote">Comprar un lote</string>
+    <string name="rewards_interest_inversion">Comprar en proyecto</string>
+    <string name="rewards_interest_corretaje">Servicio de corretaje</string>
+    <string name="rewards_availability_inmediata">Inmediata</string>
+    <string name="rewards_availability_averiguar">Averiguar</string>
+    <string name="rewards_availability_por_confirmar">Por confirmar</string>
+</resources>
