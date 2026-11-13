@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Detalle de propiedad (Ariz_Web_frontend/src/app/(public)/propiedades/[slug]/page.tsx) -->
+    <string name="listings_back">Volver</string>
+    <string name="listings_retry">Reintentar</string>
+    <string name="listings_no_photos">Sin fotos</string>
+    <string name="listings_per_month">/ mes</string>
+    <string name="listings_maintenance">Mantenimiento %1$s / mes</string>
+
+    <string name="listings_spec_total_area">m² tot.</string>
+    <string name="listings_spec_built_area">m² const.</string>
+    <string name="listings_spec_bedrooms">dorm.</string>
+    <string name="listings_spec_bathroom">baño</string>
+    <string name="listings_spec_bathrooms">baños</string>
+    <string name="listings_spec_half_bathroom">medio baño</string>
+    <string name="listings_spec_half_bathrooms">medios baños</string>
+    <string name="listings_spec_parking">estac.</string>
+    <string name="listings_spec_brand_new">A estrenar</string>
+    <string name="listings_spec_age_one">1 año</string>
+    <string name="listings_spec_age_many">%1$d años</string>
+
+    <string name="listings_description">Descripción</string>
+    <string name="listings_read_more">Ver más</string>
+    <string name="listings_read_less">Ver menos</string>
+
+    <string name="listings_features">Características completas</string>
+    <string name="listings_features_general">GENERALES</string>
+    <string name="listings_features_services">SERVICIOS</string>
+    <string name="listings_features_outdoors">EXTERIORES</string>
+    <string name="listings_feature_total_area">M² totales</string>
+    <string name="listings_feature_built_area">M² construidos</string>
+    <string name="listings_feature_bedrooms">Dormitorios</string>
+    <string name="listings_feature_bathrooms">Baños</string>
+    <string name="listings_feature_half_bathrooms">Medios baños</string>
+    <string name="listings_feature_parking">Estacionamientos</string>
+    <string name="listings_feature_year">Año construido</string>
+    <string name="listings_feature_condition">Estado</string>
+    <string name="listings_features_no_services">Sin servicios registrados.</string>
+    <string name="listings_features_no_outdoors">Sin exteriores registrados.</string>
+
+    <string name="listings_condition_new">A estrenar</string>
+    <string name="listings_condition_excellent">Excelente estado</string>
+    <string name="listings_condition_good">Buen estado</string>
+    <string name="listings_condition_remodeled">Remodelado</string>
+    <string name="listings_condition_to_remodel">Para remodelar</string>
+    <string name="listings_condition_under_construction">En construcción</string>
+
+    <string name="listings_location">Ubicación</string>
+    <string name="listings_open_maps">Abrir en Google Maps</string>
+    <string name="listings_approximate_location">Ubicación aproximada disponible por distrito</string>
+    <string name="listings_approximate_location_note">El anunciante prefirió mostrar una ubicación aproximada. Coordina una visita para ver la dirección exacta.</string>
+
+    <string name="listings_advertiser_verified">Verificado por ARIZ</string>
+    <string name="listings_agent_real_estate">Inmobiliaria</string>
+    <string name="listings_agent_agent">Agente inmobiliario</string>
+    <string name="listings_agent_independent">Agente independiente</string>
+    <string name="listings_agent_owner">Propietario particular</string>
+    <string name="listings_agent_developer">Desarrollador</string>
+    <string name="listings_agent_architect">Arquitecto</string>
+
+    <string name="listings_similar">Propiedades similares</string>
+    <string name="listings_similar_subtitle">Otras opciones que podrían interesarte</string>
+
+    <string name="listings_contact_whatsapp">WhatsApp</string>
+    <string name="listings_contact_call">Llamar</string>
+    <string name="listings_whatsapp_message">Hola, vi \"%1$s\" en ARIZ y quisiera más información.</string>
+    <string name="listings_coming_soon">Disponible próximamente</string>
+    <string name="listings_favorite_add">Guardar en favoritos</string>
+    <string name="listings_favorite_remove">Quitar de favoritos</string>
+    <string name="listings_advertiser_view_profile">Ver perfil</string>
+    <string name="listings_price_alert">Avísame si baja de precio</string>
+    <string name="listings_price_alert_creating">Guardando...</string>
+    <string name="listings_price_alert_created">Aviso creado</string>
+    <string name="listings_price_alert_failed">No pudimos crear el aviso. Inténtalo nuevamente.</string>
+    <string name="listings_contact_message">Consultar</string>
+    <string name="listings_lead_default_message">¡Hola! Quiero que se comuniquen conmigo por este inmueble que vi en ARIZ.</string>
+</resources>
