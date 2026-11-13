@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "com.tecsup.app_ariz.feature.favorites"
 }
+
+dependencies {
+    implementation(project(":core:favorites"))
+}

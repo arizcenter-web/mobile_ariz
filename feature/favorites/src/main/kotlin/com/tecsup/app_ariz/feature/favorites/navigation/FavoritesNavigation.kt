@@ -9,7 +9,24 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object FavoritesRoute
 
-/** Punto de entrada publico de la feature: :app solo conoce esta funcion. */
-fun NavGraphBuilder.favoritesScreen(modifier: Modifier = Modifier) {
-    composable<FavoritesRoute> { FavoritesScreen(modifier) }
+/**
+ * Punto de entrada publico de la feature: :app solo conoce esta funcion.
+ *
+ * La feature no conoce a las demás: pide "abrir esta propiedad", "iniciar sesión" o "explorar" y
+ * `:app` decide a qué pantalla corresponde.
+ */
+fun NavGraphBuilder.favoritesScreen(
+    onPropertyClick: (slug: String) -> Unit,
+    onLoginClick: () -> Unit,
+    onExploreClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    composable<FavoritesRoute> {
+        FavoritesScreen(
+            onPropertyClick = onPropertyClick,
+            onLoginClick = onLoginClick,
+            onExploreClick = onExploreClick,
+            modifier = modifier,
+        )
+    }
 }

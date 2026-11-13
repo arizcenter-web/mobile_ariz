@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mis favoritos (Ariz_Web_frontend/src/features/favorites/components/favorite-properties-list.tsx) -->
+    <string name="favorites_header_eyebrow">TU SELECCIÓN PERSONAL</string>
+    <string name="favorites_header_title">Mis favoritos</string>
+    <string name="favorites_header_description">Guarda las propiedades que te interesan y vuelve a ellas cuando quieras.</string>
+    <string name="favorites_list_eyebrow">TU LISTA GUARDADA</string>
+    <string name="favorites_list_title">Propiedades que te interesan</string>
+    <string name="favorites_count_one">1 favorito</string>
+    <string name="favorites_count_many">%1$d favoritos</string>
+    <string name="favorites_saved_on">Guardada el %1$s</string>
+    <string name="favorites_view">Ver %1$s</string>
+    <string name="favorites_remove">Quitar de favoritos</string>
+    <string name="favorites_retry">Reintentar</string>
+
+    <string name="favorites_empty_eyebrow">TU PRÓXIMA PROPIEDAD PUEDE ESTAR AQUÍ</string>
+    <string name="favorites_empty_title">Aún no tienes favoritos</string>
+    <string name="favorites_empty_description">Explora los anuncios y toca el corazón de las propiedades que quieras comparar o revisar más adelante.</string>
+    <string name="favorites_empty_action">Explorar propiedades</string>
+
+    <string name="favorites_signed_out_title">Guarda tus favoritos</string>
+    <string name="favorites_signed_out_description">Inicia sesión para guardar propiedades y volver a ellas cuando quieras.</string>
+    <string name="favorites_signed_out_action">Iniciar sesión</string>
+</resources>
