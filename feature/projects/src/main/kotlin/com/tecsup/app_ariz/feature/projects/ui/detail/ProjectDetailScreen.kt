@@ -62,6 +62,7 @@ import com.tecsup.app_ariz.feature.projects.ui.component.ProjectSpecStrip
 @Composable
 fun ProjectDetailScreen(
     onBackClick: () -> Unit,
+    onPlanClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProjectDetailViewModel = hiltViewModel(),
 ) {
@@ -71,6 +72,7 @@ fun ProjectDetailScreen(
         state = state,
         onAction = viewModel::onAction,
         onBackClick = onBackClick,
+        onPlanClick = onPlanClick,
         modifier = modifier,
     )
 }
@@ -82,6 +84,7 @@ fun ProjectDetailContent(
     onAction: (ProjectDetailAction) -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onPlanClick: () -> Unit = {},
 ) {
     val detail = state.detail
     val whatsAppMessage = stringResource(R.string.projects_whatsapp_message, detail?.name.orEmpty())
@@ -123,7 +126,7 @@ fun ProjectDetailContent(
                     ArizPrimaryButton(text = stringResource(R.string.projects_retry), onClick = { onAction(ProjectDetailAction.Retry) })
                 }
 
-                else -> DetailBody(detail)
+                else -> DetailBody(detail, onPlanClick)
             }
             BackButton(onClick = onBackClick)
         }
@@ -139,7 +142,7 @@ fun ProjectDetailContent(
 }
 
 @Composable
-private fun DetailBody(detail: ProjectDetail) {
+private fun DetailBody(detail: ProjectDetail, onPlanClick: () -> Unit) {
     val uriHandler = LocalUriHandler.current
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         PhotoGallery(images = detail.gallery, emptyLabel = stringResource(R.string.projects_detail_no_photos)) {
@@ -174,6 +177,23 @@ private fun DetailBody(detail: ProjectDetail) {
             ProjectSpecStrip(detail)
             ProjectDescription(detail.description)
             ProjectFeatures(detail)
+            if (detail.hasPublishedSitePlan) {
+                Surface(
+                    onClick = onPlanClick,
+                    modifier = Modifier.fillMaxWidth().height(44.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    color = MaterialTheme.colorScheme.surface,
+                    border = BorderStroke(1.dp, ArizColors.Brand),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(
+                            text = stringResource(R.string.projects_plan_button),
+                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+                            color = ArizColors.Brand,
+                        )
+                    }
+                }
+            }
             ProjectLots(detail)
             ProjectMilestones(detail)
             ProjectMedia(detail, onOpenUrl = { uriHandler.openUri(it) })

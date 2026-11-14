@@ -3,6 +3,8 @@ package com.tecsup.app_ariz.feature.projects.navigation
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
+import com.tecsup.app_ariz.feature.projects.ui.plan.PlanViewerScreen
 import com.tecsup.app_ariz.feature.projects.ui.detail.ProjectDetailScreen
 import com.tecsup.app_ariz.feature.projects.ui.list.ProjectListScreen
 import kotlinx.serialization.Serializable
@@ -15,6 +17,10 @@ data object ProjectsRoute
 @Serializable
 data class ProjectDetailRoute(val slug: String)
 
+/** Plano publicado de un proyecto (se abre con el código que coordina un asesor). */
+@Serializable
+data class ProjectPlanRoute(val slug: String)
+
 /**
  * Punto de entrada publico de la feature: :app solo conoce esta funcion.
  *
@@ -24,12 +30,19 @@ data class ProjectDetailRoute(val slug: String)
 fun NavGraphBuilder.projectsScreen(
     onBackClick: () -> Unit,
     onProjectClick: (slug: String) -> Unit,
+    onPlanClick: (slug: String) -> Unit,
+    onMapClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     composable<ProjectsRoute> {
-        ProjectListScreen(onBackClick = onBackClick, onProjectClick = onProjectClick, modifier = modifier)
+        ProjectListScreen(onBackClick = onBackClick, onProjectClick = onProjectClick, onMapClick = onMapClick, modifier = modifier)
     }
-    composable<ProjectDetailRoute> {
-        ProjectDetailScreen(onBackClick = onBackClick, modifier = modifier)
+    composable<ProjectDetailRoute> { entry ->
+        ProjectDetailScreen(
+            onBackClick = onBackClick,
+            onPlanClick = { onPlanClick(entry.toRoute<ProjectDetailRoute>().slug) },
+            modifier = modifier,
+        )
     }
+    composable<ProjectPlanRoute> { PlanViewerScreen(onBackClick = onBackClick, modifier = modifier) }
 }

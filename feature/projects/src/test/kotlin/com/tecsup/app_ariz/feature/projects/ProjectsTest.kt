@@ -126,6 +126,8 @@ class ProjectViewModelsTest {
             requestedSlug = slug
             return result
         }
+        override suspend fun getSitePlan(slug: String, code: String): AppResult<com.tecsup.app_ariz.feature.projects.domain.model.PublicPlan?> = error("no se usa")
+        override suspend fun downloadSheet(slug: String, id: String, apartment: Boolean, code: String, fileName: String): AppResult<String> = error("no se usa")
     }
 
     private val catalog = FakeCatalog()

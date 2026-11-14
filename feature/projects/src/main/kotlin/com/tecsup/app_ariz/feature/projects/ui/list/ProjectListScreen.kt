@@ -70,6 +70,7 @@ private const val LoadMoreThreshold = 3
 fun ProjectListScreen(
     onBackClick: () -> Unit,
     onProjectClick: (slug: String) -> Unit,
+    onMapClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     viewModel: ProjectListViewModel = hiltViewModel(),
 ) {
@@ -79,6 +80,7 @@ fun ProjectListScreen(
         onAction = viewModel::onAction,
         onBackClick = onBackClick,
         onProjectClick = onProjectClick,
+        onMapClick = onMapClick,
         modifier = modifier,
     )
 }
@@ -91,6 +93,7 @@ fun ProjectListContent(
     onBackClick: () -> Unit,
     onProjectClick: (slug: String) -> Unit,
     modifier: Modifier = Modifier,
+    onMapClick: () -> Unit = {},
 ) {
     LightStatusBarIcons()
     val listState = rememberLazyListState()
@@ -112,6 +115,19 @@ fun ProjectListContent(
     ) {
         item(key = "hero") { Hero(onBackClick = onBackClick) }
         item(key = "stages") { StageChips(selected = state.filters.stage, onSelected = { onAction(ProjectListAction.StageChanged(it)) }) }
+        item(key = "map") {
+            Surface(
+                onClick = onMapClick,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(44.dp),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surface,
+                border = BorderStroke(1.dp, ArizColors.Brand),
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(stringResource(R.string.projects_map_button), style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold), color = ArizColors.Brand)
+                }
+            }
+        }
         item(key = "filters") {
             FiltersCard(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp))
         }
