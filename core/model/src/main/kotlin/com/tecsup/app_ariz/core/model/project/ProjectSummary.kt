@@ -24,4 +24,7 @@ data class ProjectSummary(
     val featured: Boolean = false,
     /** Precio del lote más barato; el web lo prefiere a `priceFrom` en el directorio de proyectos. */
     val cheapestPrice: Double? = null,
+    /** Punto del proyecto en el mapa; `null` si aún no se definió. */
+    val latitude: Double? = null,
+    val longitude: Double? = null,
 )

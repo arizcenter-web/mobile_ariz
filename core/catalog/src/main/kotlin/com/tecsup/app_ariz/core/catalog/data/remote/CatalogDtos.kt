@@ -18,6 +18,8 @@ internal data class PriceDto(val amount: Double = 0.0, val currency: String = "P
 internal data class LocationDto(
     val department: String = "",
     val district: String = "",
+    val lat: Double? = null,
+    val lng: Double? = null,
 )
 
 @Serializable

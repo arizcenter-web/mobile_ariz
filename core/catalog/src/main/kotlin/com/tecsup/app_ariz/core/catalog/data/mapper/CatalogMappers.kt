@@ -51,6 +51,8 @@ internal fun ProjectDto.toDomain() = ProjectSummary(
     publishedAtMillis = publishedAt.isoToEpochMillis(),
     featured = featured,
     cheapestPrice = cheapestLotPrice,
+    latitude = location.lat,
+    longitude = location.lng,
 )
 
 internal fun <D, T> PagedDto<D>.toDomain(transform: (D) -> T) = Page(
