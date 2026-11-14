@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pro_back">Volver</string>
+    <string name="pro_retry">Reintentar</string>
+    <string name="pro_panel_eyebrow">PANEL PROFESIONAL</string>
+    <string name="pro_cancel">Cancelar</string>
+    <string name="pro_delete">Eliminar</string>
+
+    <!-- Dashboard (owner/page.tsx) -->
+    <string name="pro_dashboard_welcome">BIENVENIDO</string>
+    <string name="pro_dashboard_hello">Hola, %1$s</string>
+    <string name="pro_dashboard_intro">Un nuevo ciclo de publicaciones comienza. Tienes tu actividad, membresía y consultas listas para revisar en un solo lugar.</string>
+    <string name="pro_notice_pending">Tu perfil está pendiente de validación administrativa. Podrás publicar cuando sea aprobado.</string>
+    <string name="pro_notice_rejected">Tu perfil no fue aprobado. Comunícate con Ariz Proyectos para más información.</string>
+    <string name="pro_stat_published">Propiedades publicadas</string>
+    <string name="pro_stat_published_caption">%1$d activas / %2$d pausadas</string>
+    <string name="pro_stat_projects">Proyectos activos</string>
+    <string name="pro_stat_projects_caption">%1$d en total</string>
+    <string name="pro_stat_leads">Consultas / leads</string>
+    <string name="pro_stat_leads_caption">%1$d nuevas</string>
+    <string name="pro_stat_days">Días restantes</string>
+    <string name="pro_stat_days_none">Sin plan</string>
+    <string name="pro_stat_days_caption">de tu plan</string>
+    <string name="pro_dashboard_subscription_none">No tienes un plan activo</string>
+    <string name="pro_dashboard_subscription_none_text">Activa un plan para acceder a beneficios adicionales.</string>
+    <string name="pro_dashboard_subscription_active">Plan %1$s</string>
+    <string name="pro_dashboard_subscription_active_text">Tu membresía está activa.</string>
+    <string name="pro_dashboard_see_plans">Ver planes</string>
+    <string name="pro_menu_title">Tu espacio de trabajo</string>
+
+    <!-- Menú -->
+    <string name="pro_menu_properties">Mis propiedades</string>
+    <string name="pro_menu_publish">Publicar propiedad</string>
+    <string name="pro_menu_projects">Mis proyectos</string>
+    <string name="pro_menu_leads">Consultas recibidas</string>
+    <string name="pro_menu_stats">Estadísticas</string>
+    <string name="pro_menu_subscription">Suscripción</string>
+    <string name="pro_menu_profile">Mi perfil</string>
+    <string name="pro_menu_settings">Configuración</string>
+
+    <!-- Propiedades -->
+    <string name="pro_properties_title">Mis propiedades</string>
+    <string name="pro_rentals_title">Mis alquileres</string>
+    <string name="pro_properties_new">Publicar propiedad</string>
+    <string name="pro_properties_empty">Aún no has publicado propiedades</string>
+    <string name="pro_properties_empty_text">Crea tu primera propiedad y envíala a revisión.</string>
+    <string name="pro_property_edit">Editar</string>
+    <string name="pro_project_form_title_edit">Editar proyecto</string>
+    <string name="pro_map_pick">Elegir el punto en el mapa</string>
+    <string name="pro_map_pick_hint">Toca el mapa en el punto exacto del proyecto.</string>
+    <string name="pro_map_pick_none">Aún no hay un punto elegido</string>
+    <string name="pro_map_pick_use">Usar este punto</string>
+    <string name="pro_project_category">Tipo de proyecto</string>
+    <string name="pro_project_cat_lots">Lotización</string>
+    <string name="pro_project_cat_apts">Departamentos</string>
+    <string name="pro_project_plan_hint">Los lotes o departamentos de este proyecto se arman en su plano (Administración → Proyectos → Plano).</string>
+    <string name="pro_property_publish">Publicar</string>
+    <string name="pro_property_delete_title">Eliminar propiedad</string>
+    <string name="pro_property_delete_text">¿Eliminar \"%1$s\"? Esta acción no se puede deshacer.</string>
+    <string name="pro_property_rent_suffix">/ mes</string>
+    <string name="pro_status_draft">Borrador</string>
+    <string name="pro_status_pending">En revisión</string>
+    <string name="pro_status_published">Publicada</string>
+    <string name="pro_status_paused">Pausada</string>
+    <string name="pro_status_sold">Vendida</string>
+    <string name="pro_status_rented">Alquilada</string>
+    <string name="pro_status_rejected">Rechazada</string>
+    <string name="pro_status_archived">Archivada</string>
+
+    <!-- Formulario de propiedad (owner/listings/new) -->
+    <string name="pro_form_title_new">Publicar propiedad</string>
+    <string name="pro_form_title_edit">Editar propiedad</string>
+    <string name="pro_form_section_basic">Datos principales</string>
+    <string name="pro_form_section_location">Ubicación</string>
+    <string name="pro_form_section_details">Características</string>
+    <string name="pro_form_section_amenities">Servicios</string>
+    <string name="pro_form_section_photos">Fotos</string>
+    <string name="pro_form_section_contact">Contacto de la publicación</string>
+    <string name="pro_form_operation">Operación</string>
+    <string name="pro_form_type">Tipo de propiedad</string>
+    <string name="pro_form_title">Título</string>
+    <string name="pro_form_description">Descripción</string>
+    <string name="pro_form_price">Precio</string>
+    <string name="pro_form_currency">Moneda</string>
+    <string name="pro_form_negotiable">Precio negociable</string>
+    <string name="pro_form_maintenance">Mantenimiento mensual (opcional)</string>
+    <string name="pro_form_department">Departamento</string>
+    <string name="pro_form_province">Provincia</string>
+    <string name="pro_form_district">Distrito</string>
+    <string name="pro_form_address">Dirección</string>
+    <string name="pro_form_reference">Referencia (opcional)</string>
+    <string name="pro_form_approximate">Mostrar solo ubicación aproximada</string>
+    <string name="pro_form_total_area">Área total (m²)</string>
+    <string name="pro_form_constructed_area">Área construida (m²)</string>
+    <string name="pro_form_bedrooms">Dormitorios</string>
+    <string name="pro_form_bathrooms">Baños</string>
+    <string name="pro_form_parking">Estacionamientos</string>
+    <string name="pro_form_contact_name">Nombre de contacto</string>
+    <string name="pro_form_contact_email">Correo de contacto</string>
+    <string name="pro_form_contact_phone">Teléfono de contacto</string>
+    <string name="pro_form_add_photos">Agregar fotos</string>
+    <string name="pro_form_uploading">Subiendo %1$d foto(s)...</string>
+    <string name="pro_form_cover">PORTADA</string>
+    <string name="pro_form_make_cover">Portada</string>
+    <string name="pro_form_remove_photo">Quitar</string>
+    <string name="pro_form_save_draft">Guardar borrador</string>
+    <string name="pro_form_save_publish">Guardar y publicar</string>
+    <string name="pro_form_save_changes">Guardar cambios</string>
+    <string name="pro_form_error_required">Este campo es obligatorio</string>
+    <string name="pro_form_error_number">Ingresa un número válido</string>
+    <string name="pro_form_error_long">Es demasiado largo</string>
+    <string name="pro_form_error_email">Ingresa un correo válido</string>
+    <string name="pro_form_error_photo">Agrega al menos una foto</string>
+    <string name="pro_op_sale">Venta</string>
+    <string name="pro_op_rent">Alquiler</string>
+    <string name="pro_type_apartment">Departamento</string>
+    <string name="pro_type_house">Casa</string>
+    <string name="pro_type_land">Terreno</string>
+    <string name="pro_type_office">Oficina</string>
+    <string name="pro_type_commercial">Local comercial</string>
+    <string name="pro_type_warehouse">Almacén</string>
+    <string name="pro_type_room">Cochera</string>
+    <string name="pro_currency_pen">Soles (S/)</string>
+    <string name="pro_currency_usd">Dólares ($)</string>
+
+    <!-- Proyectos -->
+    <string name="pro_projects_title">Mis proyectos</string>
+    <string name="pro_projects_empty">Aún no tienes proyectos</string>
+    <string name="pro_projects_empty_text">Los proyectos con lotes y planos se crean desde el panel web; aquí puedes seguirlos y publicarlos.</string>
+    <string name="pro_project_delete_title">Eliminar proyecto</string>
+    <string name="pro_project_delete_text">¿Eliminar \"%1$s\"? Esta acción no se puede deshacer.</string>
+    <string name="pro_project_lots">%1$d lotes</string>
+    <string name="pro_project_from">Desde %1$s</string>
+
+    <!-- Consultas y estadísticas -->
+    <string name="pro_leads_title">Consultas recibidas</string>
+    <string name="pro_leads_empty">Todavía no recibes consultas</string>
+    <string name="pro_leads_empty_text">Cuando alguien consulte por tus anuncios aparecerá aquí.</string>
+    <string name="pro_stats_title">Estadísticas</string>
+    <string name="pro_stats_eyebrow">ANALÍTICA</string>
+    <string name="pro_stats_trend">Consultas - últimos 14 días</string>
+    <string name="pro_stats_status">Propiedades por estado</string>
+    <string name="pro_stats_sources">Origen de las consultas</string>
+    <string name="pro_stats_top">Actividad reciente</string>
+    <string name="pro_stats_none">Sin datos todavía</string>
+    <string name="pro_stats_leads_in_trend">%1$d consultas</string>
+    <string name="pro_source_property_form">Formulario de propiedad</string>
+    <string name="pro_source_project_form">Formulario de proyecto</string>
+    <string name="pro_source_whatsapp">WhatsApp</string>
+    <string name="pro_source_quick_question">Pregunta rápida</string>
+    <string name="pro_source_phone">Teléfono</string>
+    <string name="pro_source_other">Otro</string>
+
+    <!-- Suscripción -->
+    <string name="pro_subscription_title">Suscripción</string>
+    <string name="pro_subscription_current">Tu plan actual</string>
+    <string name="pro_subscription_none">No tienes un plan activo</string>
+    <string name="pro_subscription_expires">Vence en %1$d días</string>
+    <string name="pro_subscription_pending">Solicitud en revisión</string>
+    <string name="pro_subscription_rejected">Solicitud rechazada: %1$s</string>
+    <string name="pro_plans_title">Planes disponibles</string>
+    <string name="pro_plan_properties">%1$d propiedades</string>
+    <string name="pro_plan_projects">%1$d proyectos</string>
+    <string name="pro_plan_days">%1$d días</string>
+    <string name="pro_plan_free">Gratis</string>
+    <string name="pro_plan_request">Solicitar</string>
+    <string name="pro_plan_request_paid">Elegir comprobante y solicitar</string>
+    <string name="pro_plan_highlight">RECOMENDADO</string>
+    <string name="pro_plan_receipt_hint">Este plan es de pago: al solicitarlo elegirás la foto del comprobante.</string>
+
+    <!-- Perfil y configuración -->
+    <string name="pro_profile_title">Mi perfil</string>
+    <string name="pro_profile_type_independent">Agente independiente</string>
+    <string name="pro_profile_type_agency">Inmobiliaria</string>
+    <string name="pro_profile_type_developer">Desarrolladora</string>
+    <string name="pro_profile_status_pending">Pendiente de validación</string>
+    <string name="pro_profile_status_approved">Aprobado</string>
+    <string name="pro_profile_status_rejected">No aprobado</string>
+    <string name="pro_profile_first_name">Nombre</string>
+    <string name="pro_profile_business">Nombre comercial</string>
+    <string name="pro_profile_email">Correo (no editable)</string>
+    <string name="pro_profile_phone">Teléfono</string>
+    <string name="pro_profile_whatsapp">WhatsApp</string>
+    <string name="pro_profile_city">Ciudad</string>
+    <string name="pro_profile_districts">Distritos de cobertura</string>
+    <string name="pro_profile_address">Dirección</string>
+    <string name="pro_profile_website">Sitio web</string>
+    <string name="pro_profile_social">Redes sociales</string>
+    <string name="pro_profile_ruc">RUC</string>
+    <string name="pro_profile_save">Guardar cambios</string>
+    <string name="pro_password_title">Cambiar contraseña</string>
+    <string name="pro_password_current">Contraseña actual</string>
+    <string name="pro_password_new">Contraseña nueva</string>
+    <string name="pro_password_change">Cambiar contraseña</string>
+    <string name="pro_settings_title">Configuración</string>
+    <string name="pro_settings_email_leads">Consultas por correo</string>
+    <string name="pro_settings_email_leads_text">Recibe cada consulta nueva en tu correo.</string>
+    <string name="pro_settings_whatsapp_leads">Consultas por WhatsApp</string>
+    <string name="pro_settings_whatsapp_leads_text">Avisos de consultas en tu WhatsApp.</string>
+    <string name="pro_settings_membership">Recordatorios de membresía</string>
+    <string name="pro_settings_membership_text">Te avisamos antes de que venza tu plan.</string>
+    <string name="pro_settings_weekly">Resumen semanal</string>
+    <string name="pro_settings_weekly_text">Un resumen de tu actividad cada semana.</string>
+
+    <!-- Tipo de perfil -->
+    <string name="pro_agency_notice_title">Habilitación por acuerdo con ARIZ</string>
+    <string name="pro_agency_notice_text">Las inmobiliarias no eligen un plan: coordinan con el gerente de ARIZ y luego envían cada ficha a revisión.</string>
+    <string name="pro_agency_contact">Coordinar con el gerente</string>
+    <string name="pro_agency_title">Solicita la habilitación de tus publicaciones</string>
+    <string name="pro_agency_text">Escríbenos para acordar la habilitación de publicaciones, cupos, revisión y condiciones de trabajo para tu inmobiliaria. Cuando esté acordado, envía la ficha a revisión desde cada propiedad o proyecto.</string>
+    <string name="pro_agency_whatsapp">Escribir por WhatsApp</string>
+    <string name="pro_agency_whatsapp_message">Hola ARIZ, soy %1$s. Quiero coordinar la habilitación de publicaciones para mi inmobiliaria.</string>
+    <string name="pro_menu_enablement">Habilitación</string>
+    <string name="pro_stat_days_agency">Por acuerdo</string>
+
+    <!-- Proyectos: alta -->
+    <string name="pro_projects_new">Nuevo proyecto</string>
+    <string name="pro_project_form_title">Nuevo proyecto</string>
+    <string name="pro_project_form_hint">Proyecto de lotización. Los planos interactivos y los proyectos de departamentos se arman desde el panel web.</string>
+    <string name="pro_project_save_publish">Guardar y enviar a revisión</string>
+    <string name="pro_form_name">Nombre del proyecto</string>
+    <string name="pro_project_stage">Etapa</string>
+    <string name="pro_stage_presale">Preventa</string>
+    <string name="pro_stage_construction">En construcción</string>
+    <string name="pro_stage_delivered">Entregado</string>
+    <string name="pro_project_price_from">Precio desde</string>
+    <string name="pro_project_price_to">Precio hasta</string>
+    <string name="pro_project_delivery">Entrega estimada (AAAA-MM-DD)</string>
+    <string name="pro_project_zone">Zona o urbanización</string>
+    <string name="pro_project_latitude">Latitud</string>
+    <string name="pro_project_longitude">Longitud</string>
+    <string name="pro_project_coords_hint">Para enviar a revisión se necesita el punto en el mapa. Cópialo desde Google Maps (mantén presionado el lugar).</string>
+    <string name="pro_project_lots_section">Inventario de lotes</string>
+    <string name="pro_project_add_lot">Agregar lote</string>
+    <string name="pro_project_lot_n">Lote %1$d</string>
+    <string name="pro_project_lot_number">Número</string>
+    <string name="pro_project_lot_block">Manzana</string>
+    <string name="pro_project_lot_area">Área (m²)</string>
+    <string name="pro_project_lot_price">Precio</string>
+    <string name="pro_project_error_date">Usa el formato AAAA-MM-DD</string>
+    <string name="pro_project_error_range">No puede ser menor que el precio desde</string>
+    <string name="pro_project_error_lot_needed">Agrega al menos un lote</string>
+    <string name="pro_project_error_lot_invalid">Cada lote necesita número, área y precio válidos</string>
+    <string name="pro_project_error_lot_duplicate">Hay números de lote repetidos</string>
+</resources>
