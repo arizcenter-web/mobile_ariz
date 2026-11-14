@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.outlined.CardGiftcard
+import androidx.compose.material.icons.outlined.Dashboard
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.material3.Icon
@@ -59,6 +60,7 @@ fun AccountScreen(
     onFavoritesClick: () -> Unit,
     onClubClick: () -> Unit,
     onInfoClick: () -> Unit,
+    onPanelClick: (Role) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AccountViewModel = hiltViewModel(),
 ) {
@@ -70,6 +72,7 @@ fun AccountScreen(
         onFavoritesClick = onFavoritesClick,
         onClubClick = onClubClick,
         onInfoClick = onInfoClick,
+        onPanelClick = onPanelClick,
         modifier = modifier,
     )
 }
@@ -82,6 +85,7 @@ fun AccountContent(
     onFavoritesClick: () -> Unit,
     onClubClick: () -> Unit,
     onInfoClick: () -> Unit,
+    onPanelClick: (Role) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     when (val session = state.session) {
@@ -94,6 +98,7 @@ fun AccountContent(
             onFavoritesClick = onFavoritesClick,
             onClubClick = onClubClick,
             onInfoClick = onInfoClick,
+            onPanelClick = { onPanelClick(session.user.role) },
             modifier = modifier,
         )
     }
@@ -156,6 +161,7 @@ private fun SignedInContent(
     onFavoritesClick: () -> Unit,
     onClubClick: () -> Unit,
     onInfoClick: () -> Unit,
+    onPanelClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LightStatusBarIcons()
@@ -208,6 +214,7 @@ private fun SignedInContent(
         }
 
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            MenuRow(icon = Icons.Outlined.Dashboard, label = stringResource(user.role.panelLabelRes()), onClick = onPanelClick)
             MenuRow(
                 icon = Icons.Outlined.FavoriteBorder,
                 label = stringResource(R.string.account_menu_favorites),
@@ -267,6 +274,13 @@ private fun MenuRow(icon: androidx.compose.ui.graphics.vector.ImageVector, label
 }
 
 @StringRes
+private fun Role.panelLabelRes(): Int = when (this) {
+    Role.ADMIN -> R.string.account_menu_panel_admin
+    Role.USER -> R.string.account_menu_panel_customer
+    Role.REAL_ESTATE -> R.string.account_menu_panel_professional
+}
+
+@StringRes
 private fun Role.labelRes(): Int = when (this) {
     Role.ADMIN -> R.string.account_role_admin
     Role.USER -> R.string.account_role_user
@@ -286,6 +300,7 @@ private fun AccountSignedInPreview() {
             onFavoritesClick = {},
             onClubClick = {},
             onInfoClick = {},
+            onPanelClick = {},
         )
     }
 }
@@ -301,6 +316,7 @@ private fun AccountSignedOutPreview() {
             onFavoritesClick = {},
             onClubClick = {},
             onInfoClick = {},
+            onPanelClick = {},
         )
     }
 }

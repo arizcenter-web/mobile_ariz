@@ -10,4 +10,7 @@
     <string name="account_menu_favorites">Mis favoritos</string>
     <string name="account_menu_club">Ariz Club y recompensas</string>
     <string name="account_menu_info">Ayuda e información</string>
+    <string name="account_menu_panel_professional">Panel profesional</string>
+    <string name="account_menu_panel_customer">Mi panel de cliente</string>
+    <string name="account_menu_panel_admin">Panel de administración</string>
 </resources>
