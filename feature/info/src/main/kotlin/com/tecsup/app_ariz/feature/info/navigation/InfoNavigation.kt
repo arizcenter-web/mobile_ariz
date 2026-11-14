@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.tecsup.app_ariz.feature.info.ui.AboutPage
 import com.tecsup.app_ariz.feature.info.ui.BuildPage
+import com.tecsup.app_ariz.feature.info.ui.ClaimsPage
 import com.tecsup.app_ariz.feature.info.ui.ContactPage
 import com.tecsup.app_ariz.feature.info.ui.HelpPage
 import com.tecsup.app_ariz.feature.info.ui.InfoHubScreen
@@ -15,7 +16,7 @@ import kotlinx.serialization.Serializable
 
 /** Páginas informativas de la web que la app también ofrece. */
 @Serializable
-enum class InfoPage { ABOUT, SERVICES, BUILD, CONTACT, HELP, TERMS }
+enum class InfoPage { ABOUT, SERVICES, BUILD, CONTACT, HELP, TERMS, CLAIMS }
 
 /** Menú con todas las páginas informativas. */
 @Serializable
@@ -45,6 +46,7 @@ fun NavGraphBuilder.infoScreen(
             InfoPage.CONTACT -> ContactPage(onBackClick, modifier)
             InfoPage.HELP -> HelpPage(onBackClick, onContactClick = onContact, modifier = modifier)
             InfoPage.TERMS -> TermsPage(onBackClick, onContactClick = onContact, modifier = modifier)
+            InfoPage.CLAIMS -> ClaimsPage(onBackClick, modifier)
         }
     }
 }

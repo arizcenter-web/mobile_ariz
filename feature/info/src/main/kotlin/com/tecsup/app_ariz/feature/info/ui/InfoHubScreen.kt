@@ -14,6 +14,7 @@ import androidx.compose.material.icons.outlined.Construction
 import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.HelpOutline
+import androidx.compose.material.icons.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Work
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -77,6 +78,7 @@ private fun InfoPage.labelRes(): Int = when (this) {
     InfoPage.CONTACT -> R.string.info_page_contact
     InfoPage.HELP -> R.string.info_page_help
     InfoPage.TERMS -> R.string.info_page_terms
+    InfoPage.CLAIMS -> R.string.info_page_claims
 }
 
 private fun InfoPage.icon() = when (this) {
@@ -86,4 +88,5 @@ private fun InfoPage.icon() = when (this) {
     InfoPage.CONTACT -> Icons.Outlined.Email
     InfoPage.HELP -> Icons.Outlined.HelpOutline
     InfoPage.TERMS -> Icons.Outlined.Description
+    InfoPage.CLAIMS -> Icons.Outlined.MenuBook
 }
