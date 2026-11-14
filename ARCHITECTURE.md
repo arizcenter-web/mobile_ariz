@@ -17,6 +17,7 @@ core/
   session/            SessionManager: usuario autenticado, restaurar (/auth/me), cerrar sesión, expiración
   catalog/            Catálogo público compartido (propiedades y proyectos con filtros): Inicio, Buscar, listings, projects
   favorites/          Favoritos del usuario: ids en vivo, guardar/quitar, FavoritesViewModel y rememberFavorites()
+  media/              Subida de imágenes a Cloudinary (firma del backend): fotos de propiedades y comprobantes
   leads/              Formulario "Contacta al anunciante" (hoja inferior) de propiedades y proyectos
   database/           Room: @Database, DAOs y entidades compartidas (caché offline)
   datastore/          Preferencias no sensibles
@@ -34,17 +35,49 @@ build-logic/          Convention plugins (toda la config de Gradle compartida)
 | `home`       | `properties`, `projects` (vía `core:catalog`) |
 | `search`     | `properties` (vía `core:catalog`)           |
 | `listings`   | `properties`, `alerts` (detalle y aviso de precio) |
-| `projects`   | `projects` (directorio y detalle)           |
+| `projects`   | `projects` (directorio, detalle y plano publicado con código de acceso + fichas PDF) |
 | `favorites`  | `favorites` (lista; el estado vive en `core:favorites`) |
 | `agents`     | `agents` (perfil público del anunciante)    |
 | `account`    | sesión (`core:session`): perfil y accesos   |
 | `rewards`    | `referrals`, `redemptions` (Ariz Club)      |
 | `investments`| `investment-opportunities`                  |
-| `info`       | `contact-reports` + páginas estáticas del web (nosotros, servicios, construye, ayuda, términos) |
+| `professional` | `professionals`, `properties`, `projects`, `leads`, `plans` (panel de inmobiliaria, agente y desarrolladora) |
+| `customer`   | `customer-account`, `customer/membership` (panel del propietario particular; reutiliza las pantallas de propiedades de `professional` vía rutas públicas que `:app` conecta) |
+| `admin`      | `admin/*` (profesionales, inmobiliarias, desarrolladoras, propiedades, proyectos, suscripciones, planes, referidos, canjes, incentivos, campañas, promociones, reclamos, contactos, inversiones) |
+| `info`       | `contact-reports`, `claims` (Libro de Reclamaciones) + páginas estáticas del web (nosotros, servicios, construye, ayuda, términos) |
+| `map`        | `projects` (mapa público de proyectos con marcadores, vía `core:catalog`) |
 
-No se implementó (paneles de gestión pensados para escritorio, fuera del alcance de la app de clientes):
-`admin/*`, `owner/*`, `claims` (libro de reclamaciones), `campaigns`, `media`. Los contactos recibidos por
-un profesional (`GET /leads/mine`) tampoco están: la app cubre a clientes e invitados.
+Los tres paneles (profesional, cliente, administrador) se abren desde **Cuenta → "Mi panel"** según el rol de la
+sesión (`REAL_ESTATE`, `USER`, `ADMIN`). El panel de administración es **dirigido por un catálogo**
+(`AdminSections`): cada sección declara endpoint, campos y acciones, y una sola pantalla genérica las muestra; agregar
+una sección es agregar un elemento al catálogo.
+
+Las propiedades y los proyectos de lotización de ARIZ los crea el admin con los mismos formularios del panel
+profesional (`OwnerPropertyFormRoute(admin = true)` y `ProProjectFormRoute(admin = true)`; los endpoints `admin/...`
+cambian solo en el alta y la publicación). La app los conecta por callbacks en `ArizApp`, porque las features no se
+conocen entre sí.
+
+Editar un proyecto es seguro porque el backend reemplaza el proyecto completo en cada PATCH: la app carga el detalle,
+guarda en `ProjectDraft.extras` lo que no edita (financiamiento, hitos, videos, servicios...) y lo reenvía. Si el
+proyecto es de departamentos o tiene plano interactivo, se muestra el motivo y se edita en el web.
+
+Las exportaciones (Excel/PDF) se declaran en el catálogo (`AdminExport`), se descargan a la caché y se abren con un
+`FileProvider` (autoridad `<applicationId>.exports`). Las acciones pueden mostrar un dato de la respuesta (`resultKey`),
+por ejemplo el código de acceso a planos, que el backend entrega una sola vez.
+
+El **plano del proyecto** (solo admin, `SitePlanScreen`) edita el JSON completo del plano (`SitePlans`, funciones puras con
+tests) para no perder lo que la app no dibuja. En lotes: editar, agregar, quitar e importar desde Excel; en
+departamentos: edificios (rectángulo por medidas alrededor del punto del proyecto), pisos con su imagen y departamentos
+dibujados tocando el plano del piso. El guardado usa `revision` (control de concurrencia) y puede publicar.
+
+Con **Google Maps** (`maps-compose`) el administrador también dibuja sobre el mapa (`PlanMapEditor`): coloca la imagen del
+plano (subida o una página de PDF convertida con `PdfRenderer`) con centro, tamaño, giro y opacidad; dibuja lotes y zonas
+tocando el mapa (con área y perímetro medidos y las mismas reglas de polígono del backend); y asigna cada dibujo a un lote
+del inventario o a uno nuevo. El formulario de proyecto usa el mismo mapa para elegir el punto exacto.
+
+El dashboard del admin dibuja con `Canvas` los mismos gráficos del web (tendencias por mes, evolución, perfiles, top por
+lotes); los filtros de periodo y perfil se aplican en el dispositivo (`buildAnalytics`, función pura con tests). Cada
+tarjeta del catálogo tiene "Ver detalle" con todos los campos del registro.
 
 ### Qué va en `core` y qué en una feature
 
@@ -144,6 +177,7 @@ Flujo: `Screen → ViewModel → UseCase → Repository(interfaz) → Repository
 | Debug | `http://10.0.2.2:4000/` (localhost del PC desde el emulador); HTTP permitido solo en debug |
 | Release | **Pendiente:** reemplazar el placeholder `https://api.example.com/` por la URL real |
 | ProGuard (release, minify activo) | `app/proguard-rules.pro` |
+| Clave de Google Maps | propiedad Gradle `arizMapsApiKey` (en `~/.gradle/gradle.properties`, no en el repo) → `manifestPlaceholders` → `com.google.android.geo.API_KEY`. Crear la clave en Google Cloud con "Maps SDK for Android" y restringirla al paquete `com.tecsup.app_ariz` + SHA-1 de la firma. Sin clave el mapa sale gris. |
 | Estilo de código | `.editorconfig` |
 
 Plugins disponibles: `ariz.android.application`, `ariz.android.library`, `ariz.jvm.library`,
@@ -162,5 +196,5 @@ Compilar: `./gradlew assembleDebug` · Tests unitarios: `./gradlew test`.
 - **Login con Google:** el código está listo, pero el botón solo aparece si existe `app/google-services.json`
   (Firebase Console → app Android `com.tecsup.app_ariz` con el SHA-1 de debug/release, y proveedor Google
   activado). El proyecto Firebase debe ser el mismo del backend (`FIREBASE_PROJECT_ID`).
-- Mapas (lotes/planos): el web usa Google Maps; decidir `maps-compose` y la API key de Android.
+- Mapas: ya usa `maps-compose`; falta la API key de Android (ver sección 6, `arizMapsApiKey`).
 - Firma de release (keystore) y CI.
