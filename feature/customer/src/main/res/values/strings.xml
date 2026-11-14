@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cus_back">Volver</string>
+    <string name="cus_retry">Reintentar</string>
+    <string name="cus_eyebrow">PANEL DE CLIENTE</string>
+
+    <string name="cus_dashboard_welcome">BIENVENIDO</string>
+    <string name="cus_dashboard_hello">Hola, %1$s</string>
+    <string name="cus_dashboard_intro">Publica y administra tus propiedades, revisa tu membresía y mantén tu perfil al día.</string>
+    <string name="cus_stat_properties">Mis propiedades</string>
+    <string name="cus_stat_properties_caption">%1$d publicadas / %2$d pausadas</string>
+    <string name="cus_stat_rentals">Propiedades en alquiler</string>
+    <string name="cus_stat_rentals_caption">Anuncios de alquiler</string>
+    <string name="cus_stat_favorites">Mis favoritos</string>
+    <string name="cus_stat_favorites_caption">Propiedades guardadas</string>
+    <string name="cus_stat_trial">Publicación gratuita</string>
+    <string name="cus_stat_trial_value">30 días</string>
+    <string name="cus_stat_trial_caption">Para tu primera propiedad</string>
+    <string name="cus_stat_membership">Membresía</string>
+    <string name="cus_stat_membership_caption">Consulta tus opciones</string>
+    <string name="cus_stat_days_value">%1$d días</string>
+    <string name="cus_stat_in_review">En revisión</string>
+    <string name="cus_stat_no_plan">Sin plan</string>
+    <string name="cus_trial_title">Tu primera propiedad es gratis</string>
+    <string name="cus_trial_text">La primera publicación tiene 30 días sin costo; el conteo empieza cuando se publique. Después elige uno de los paquetes.</string>
+    <string name="cus_menu_title">Tu espacio</string>
+    <string name="cus_menu_publish">Publicar propiedad</string>
+    <string name="cus_menu_properties">Mis propiedades</string>
+    <string name="cus_menu_favorites">Mis favoritos</string>
+    <string name="cus_menu_rentals">Mis alquileres</string>
+    <string name="cus_menu_membership">Membresía</string>
+    <string name="cus_menu_profile">Mi perfil</string>
+
+    <string name="cus_membership_title">Membresía</string>
+    <string name="cus_membership_current">Tu membresía</string>
+    <string name="cus_membership_none">No tienes una membresía activa</string>
+    <string name="cus_membership_none_text">Elige un paquete, paga y envía la foto del comprobante para que lo revisemos.</string>
+    <string name="cus_membership_active">%1$d propiedades · vence en %2$d días</string>
+    <string name="cus_membership_pending">Solicitud en revisión</string>
+    <string name="cus_membership_rejected">Solicitud rechazada: %1$s</string>
+    <string name="cus_membership_expired">Membresía vencida</string>
+    <string name="cus_membership_published">Tienes %1$d propiedad(es) publicada(s).</string>
+    <string name="cus_packages_title">Paquetes</string>
+    <string name="cus_package_properties">%1$d propiedad(es)</string>
+    <string name="cus_package_days">%1$d días</string>
+    <string name="cus_package_choose">Elegir comprobante y solicitar</string>
+    <string name="cus_package_hint">Pagas por transferencia o Yape y subes la foto del comprobante.</string>
+    <string name="cus_membership_sent">Solicitud enviada. Te avisaremos cuando sea revisada.</string>
+
+    <string name="cus_profile_title">Mi perfil</string>
+    <string name="cus_profile_first_name">Nombre</string>
+    <string name="cus_profile_last_name">Apellido</string>
+    <string name="cus_profile_email">Correo (no editable)</string>
+    <string name="cus_profile_phone">Teléfono</string>
+    <string name="cus_profile_bio">Acerca de ti</string>
+    <string name="cus_profile_save">Guardar cambios</string>
+    <string name="cus_profile_saved">Perfil actualizado.</string>
+    <string name="cus_password_title">Cambiar contraseña</string>
+    <string name="cus_password_current">Contraseña actual</string>
+    <string name="cus_password_new">Contraseña nueva</string>
+    <string name="cus_password_change">Cambiar contraseña</string>
+    <string name="cus_password_missing">Escribe tu contraseña actual y la nueva.</string>
+    <string name="cus_password_done">Contraseña actualizada.</string>
+</resources>
