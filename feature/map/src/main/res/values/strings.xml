@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="map_back">Volver</string>
+    <string name="map_search">Buscar proyecto o distrito</string>
+    <string name="map_all">Todos</string>
+    <string name="map_lots">Lotizaciones</string>
+    <string name="map_apartments">Departamentos</string>
+    <string name="map_loading">Cargando proyectos…</string>
+    <string name="map_error">No se pudo cargar. Toca para reintentar.</string>
+    <string name="map_empty">No hay proyectos con ubicación para mostrar.</string>
+    <string name="map_count">%1$d proyectos en el mapa</string>
+    <string name="map_from">Desde %1$s</string>
+    <string name="map_open">Ver proyecto</string>
+</resources>
