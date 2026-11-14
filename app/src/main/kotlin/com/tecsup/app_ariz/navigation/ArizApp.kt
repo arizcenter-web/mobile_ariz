@@ -26,6 +26,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.tecsup.app_ariz.feature.account.navigation.AccountRoute
 import com.tecsup.app_ariz.feature.account.navigation.accountScreen
+import com.tecsup.app_ariz.feature.admin.navigation.AdminRoute
+import com.tecsup.app_ariz.feature.admin.navigation.adminGraph
 import com.tecsup.app_ariz.feature.agents.navigation.AgentProfileRoute
 import com.tecsup.app_ariz.feature.agents.navigation.agentsScreen
 import com.tecsup.app_ariz.feature.auth.navigation.AuthRoute
@@ -44,7 +46,18 @@ import com.tecsup.app_ariz.feature.investments.navigation.InvestmentsRoute
 import com.tecsup.app_ariz.feature.investments.navigation.investmentsScreen
 import com.tecsup.app_ariz.feature.listings.navigation.PropertyDetailRoute
 import com.tecsup.app_ariz.feature.listings.navigation.listingsScreen
+import com.tecsup.app_ariz.core.model.Role
+import com.tecsup.app_ariz.feature.customer.navigation.CustomerRoute
+import com.tecsup.app_ariz.feature.customer.navigation.customerGraph
+import com.tecsup.app_ariz.feature.professional.navigation.OwnerPropertiesRoute
+import com.tecsup.app_ariz.feature.professional.navigation.OwnerPropertyFormRoute
+import com.tecsup.app_ariz.feature.professional.navigation.ProProjectFormRoute
+import com.tecsup.app_ariz.feature.professional.navigation.ProfessionalRoute
+import com.tecsup.app_ariz.feature.professional.navigation.professionalGraph
+import com.tecsup.app_ariz.feature.map.navigation.MapRoute
+import com.tecsup.app_ariz.feature.map.navigation.mapScreen
 import com.tecsup.app_ariz.feature.projects.navigation.ProjectDetailRoute
+import com.tecsup.app_ariz.feature.projects.navigation.ProjectPlanRoute
 import com.tecsup.app_ariz.feature.projects.navigation.ProjectsRoute
 import com.tecsup.app_ariz.feature.projects.navigation.projectsScreen
 import com.tecsup.app_ariz.feature.rewards.navigation.RewardsRoute
@@ -148,6 +161,28 @@ fun ArizApp(viewModel: MainViewModel = hiltViewModel()) {
                 onFavoritesClick = { navController.navigateToTopLevel(FavoritesRoute) },
                 onClubClick = { navController.navigate(RewardsRoute()) },
                 onInfoClick = { navController.navigate(InfoRoute) },
+                onPanelClick = { role ->
+                    when (role) {
+                        Role.REAL_ESTATE -> navController.navigate(ProfessionalRoute)
+                        Role.USER -> navController.navigate(CustomerRoute)
+                        Role.ADMIN -> navController.navigate(AdminRoute)
+                    }
+                },
+            )
+            professionalGraph(navController = navController, onExit = { navController.popBackStack() })
+            adminGraph(
+                navController = navController,
+                onExit = { navController.popBackStack() },
+                onProjectForm = { id -> navController.navigate(ProProjectFormRoute(admin = true, id = id)) },
+                onPropertyForm = { id -> navController.navigate(OwnerPropertyFormRoute(id = id, admin = true)) },
+            )
+            customerGraph(
+                navController = navController,
+                onExit = { navController.popBackStack() },
+                onPublish = { navController.navigate(OwnerPropertyFormRoute()) },
+                onProperties = { navController.navigate(OwnerPropertiesRoute()) },
+                onRentals = { navController.navigate(OwnerPropertiesRoute(rentOnly = true)) },
+                onFavorites = { navController.navigate(FavoritesRoute) },
             )
             authGraph(
                 navController = navController,
@@ -160,6 +195,12 @@ fun ArizApp(viewModel: MainViewModel = hiltViewModel()) {
                 onLoginRequired = openLogin,
             )
             projectsScreen(
+                onBackClick = { navController.popBackStack() },
+                onProjectClick = openProject,
+                onPlanClick = { slug -> navController.navigate(ProjectPlanRoute(slug)) },
+                onMapClick = { navController.navigate(MapRoute) },
+            )
+            mapScreen(
                 onBackClick = { navController.popBackStack() },
                 onProjectClick = openProject,
             )

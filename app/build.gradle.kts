@@ -14,6 +14,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Host del sitio web: lo usa el intent-filter del enlace "restablecer contraseña".
         manifestPlaceholders["arizWebHost"] = providers.gradleProperty("arizWebHost").get()
+        // Clave de Google Maps (SDK de Android) para el editor de planos. Va en ~/.gradle/gradle.properties (no en el repo).
+        manifestPlaceholders["arizMapsApiKey"] = providers.gradleProperty("arizMapsApiKey").orElse("").get()
         // http solo si el backend de release se indica con http:// (APK de prueba en red local).
         manifestPlaceholders["arizCleartext"] =
             providers.gradleProperty("arizApiBaseUrl").map { it.startsWith("http://") }.orElse(false).get().toString()
@@ -61,6 +63,10 @@ dependencies {
     implementation(project(":feature:rewards"))
     implementation(project(":feature:investments"))
     implementation(project(":feature:info"))
+    implementation(project(":feature:professional"))
+    implementation(project(":feature:customer"))
+    implementation(project(":feature:admin"))
+    implementation(project(":feature:map"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
