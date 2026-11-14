@@ -83,6 +83,8 @@ data class ProjectDetail(
     val lots: List<ProjectLot>,
     val milestones: List<ProjectMilestone>,
     val advertiser: ProjectAdvertiser,
+    /** Hay un plano publicado (se ve con el código que entrega un asesor). */
+    val hasPublishedSitePlan: Boolean = false,
 ) {
     val isApartments: Boolean get() = category == ProjectCategory.DEPARTAMENTOS
 }

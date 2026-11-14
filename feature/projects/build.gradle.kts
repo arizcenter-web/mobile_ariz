@@ -9,4 +9,6 @@ android {
 dependencies {
     implementation(project(":core:catalog"))
     implementation(project(":core:leads"))
+    implementation(libs.play.services.maps)
+    implementation(libs.maps.compose)
 }

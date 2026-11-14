@@ -83,5 +83,6 @@ internal fun ProjectDetailDto.toDomain(): ProjectDetail {
             whatsapp = agent.whatsapp?.takeIf { it.isNotBlank() },
             phone = agent.phone?.takeIf { it.isNotBlank() },
         ),
+        hasPublishedSitePlan = hasPublishedSitePlan,
     )
 }

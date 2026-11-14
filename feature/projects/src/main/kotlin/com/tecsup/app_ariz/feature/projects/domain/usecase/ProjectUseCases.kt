@@ -19,6 +19,15 @@ class SearchProjectsUseCase @Inject constructor(
         catalog.searchProjects(filters, pageSize = ProjectsPageSize, page = page)
 }
 
+class GetSitePlanUseCase @Inject constructor(private val repository: ProjectsRepository) {
+    suspend operator fun invoke(slug: String, code: String) = repository.getSitePlan(slug, code)
+}
+
+class DownloadSheetUseCase @Inject constructor(private val repository: ProjectsRepository) {
+    suspend operator fun invoke(slug: String, id: String, apartment: Boolean, code: String, fileName: String) =
+        repository.downloadSheet(slug, id, apartment, code, fileName)
+}
+
 class GetProjectDetailUseCase @Inject constructor(
     private val repository: ProjectsRepository,
 ) {

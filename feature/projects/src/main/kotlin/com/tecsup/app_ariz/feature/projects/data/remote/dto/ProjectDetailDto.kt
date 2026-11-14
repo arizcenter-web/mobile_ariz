@@ -40,6 +40,7 @@ internal data class ProjectDetailDto(
     val lots: List<LotDto> = emptyList(),
     val milestones: List<MilestoneDto> = emptyList(),
     val agent: AgentDto = AgentDto(),
+    val hasPublishedSitePlan: Boolean = false,
 )
 
 @Serializable
