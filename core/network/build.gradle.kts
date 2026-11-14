@@ -12,8 +12,8 @@ android {
     }
 
     // URL del backend para release. Se pasa con -ParizApiBaseUrl=https://api.ariz.pe/ (debe terminar en "/").
-    // Sin el parámetro queda el marcador de posición hasta definir la URL pública.
-    val releaseApiBaseUrl = providers.gradleProperty("arizApiBaseUrl").orElse("https://api.example.com/").get()
+    // Sin el parámetro usa el backend de producción (Nginx quita /api antes de llegar a Nest).
+    val releaseApiBaseUrl = providers.gradleProperty("arizApiBaseUrl").orElse("https://arizinmobiliaria.com/api/").get()
 
     buildTypes {
         // 10.0.2.2 = localhost de la maquina host desde el emulador. El backend escucha en :4000 (sin prefijo /api).
@@ -21,7 +21,6 @@ android {
             buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:4000/\"")
         }
         release {
-            // TODO: definir la URL publica del backend (parametro arizApiBaseUrl) antes de publicar.
             buildConfigField("String", "API_BASE_URL", "\"$releaseApiBaseUrl\"")
         }
     }
