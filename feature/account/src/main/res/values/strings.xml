@@ -13,4 +13,9 @@
     <string name="account_menu_panel_professional">Panel profesional</string>
     <string name="account_menu_panel_customer">Mi panel de cliente</string>
     <string name="account_menu_panel_admin">Panel de administración</string>
+    <string name="account_sign_out_confirm_title">¿Quieres cerrar sesión?</string>
+    <string name="account_sign_out_confirm_text">Tu cuenta quedará desconectada en este dispositivo. Puedes volver a iniciar sesión cuando quieras.</string>
+    <string name="account_sign_out_cancel">Seguir aquí</string>
+    <string name="account_sign_out_confirm_action">Sí, cerrar sesión</string>
+    <string name="account_sign_out_confirm_eyebrow">Confirmación de cuenta</string>
 </resources>

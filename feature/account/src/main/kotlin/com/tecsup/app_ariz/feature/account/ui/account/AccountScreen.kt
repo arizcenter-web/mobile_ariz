@@ -1,5 +1,10 @@
 package com.tecsup.app_ariz.feature.account.ui.account
 
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableStateOf
+import com.tecsup.app_ariz.core.ui.component.ConfirmDialog
+import com.tecsup.app_ariz.core.ui.statusBarScrim
 import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -25,6 +30,7 @@ import androidx.compose.material.icons.outlined.CardGiftcard
 import androidx.compose.material.icons.outlined.Dashboard
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.HelpOutline
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -51,6 +57,7 @@ import com.tecsup.app_ariz.core.model.User
 import com.tecsup.app_ariz.core.session.SessionState
 import com.tecsup.app_ariz.core.ui.LightStatusBarIcons
 import com.tecsup.app_ariz.core.ui.LoadingView
+import com.tecsup.app_ariz.core.ui.component.TabHeader
 import com.tecsup.app_ariz.feature.account.R
 import com.tecsup.app_ariz.core.designsystem.R as DesignSystemR
 
@@ -144,8 +151,13 @@ private fun SignedOutContent(
             onClick = onLoginClick,
             modifier = Modifier.fillMaxWidth(),
         )
-        MenuRow(icon = Icons.Outlined.CardGiftcard, label = stringResource(R.string.account_menu_club), onClick = onClubClick)
-        MenuRow(icon = Icons.Outlined.HelpOutline, label = stringResource(R.string.account_menu_info), onClick = onInfoClick)
+        Surface(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surface, shadowElevation = 1.dp) {
+            Column {
+                MenuRow(icon = Icons.Outlined.CardGiftcard, label = stringResource(R.string.account_menu_club), onClick = onClubClick)
+                MenuDivider()
+                MenuRow(icon = Icons.Outlined.HelpOutline, label = stringResource(R.string.account_menu_info), onClick = onInfoClick)
+            }
+        }
     }
 }
 
@@ -165,75 +177,68 @@ private fun SignedInContent(
     modifier: Modifier = Modifier,
 ) {
     LightStatusBarIcons()
+    var confirmSignOut by rememberSaveable { mutableStateOf(false) }
+    if (confirmSignOut) {
+        ConfirmDialog(
+            title = stringResource(R.string.account_sign_out_confirm_title),
+            text = stringResource(R.string.account_sign_out_confirm_text),
+            confirmLabel = stringResource(R.string.account_sign_out_confirm_action),
+            dismissLabel = stringResource(R.string.account_sign_out_cancel),
+            eyebrow = stringResource(R.string.account_sign_out_confirm_eyebrow),
+            onConfirm = {
+                confirmSignOut = false
+                onSignOut()
+            },
+            onDismiss = { confirmSignOut = false },
+        )
+    }
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(ArizColors.SectionCanvas)
+            .statusBarScrim()
             .verticalScroll(rememberScrollState()),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(ArizColors.Brand)
-                .statusBarsPadding()
-                .padding(horizontal = 24.dp, vertical = 32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            Box(
-                modifier = Modifier.size(84.dp).background(ArizColors.Accent, CircleShape),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = user.name.take(1).uppercase(),
-                    style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Black),
-                    color = ArizColors.Brand,
-                )
-            }
-            Text(
-                text = user.name,
-                modifier = Modifier.padding(top = 8.dp),
-                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-                color = androidx.compose.ui.graphics.Color.White,
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                text = user.email,
-                style = MaterialTheme.typography.bodyMedium,
-                color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.8f),
-            )
-            Text(
-                text = stringResource(user.role.labelRes()).uppercase(),
-                modifier = Modifier
-                    .padding(top = 4.dp)
-                    .background(androidx.compose.ui.graphics.Color.White.copy(alpha = 0.12f), RoundedCornerShape(50))
-                    .padding(horizontal = 14.dp, vertical = 6.dp),
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Black, letterSpacing = 1.4.sp),
-                color = ArizColors.Accent,
-            )
-        }
+        // Misma cabecera que Buscar y Favoritos: rol, nombre y correo, con la inicial a la derecha.
+        TabHeader(
+            eyebrow = stringResource(user.role.labelRes()),
+            title = user.name,
+            subtitle = user.email,
+            trailing = {
+                Box(modifier = Modifier.size(56.dp).background(ArizColors.Accent, CircleShape), contentAlignment = Alignment.Center) {
+                    Text(
+                        text = user.name.take(1).uppercase(),
+                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Black),
+                        color = ArizColors.Brand,
+                    )
+                }
+            },
+        )
 
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            MenuRow(icon = Icons.Outlined.Dashboard, label = stringResource(user.role.panelLabelRes()), onClick = onPanelClick)
-            MenuRow(
-                icon = Icons.Outlined.FavoriteBorder,
-                label = stringResource(R.string.account_menu_favorites),
-                onClick = onFavoritesClick,
-            )
-            MenuRow(icon = Icons.Outlined.CardGiftcard, label = stringResource(R.string.account_menu_club), onClick = onClubClick)
-            MenuRow(icon = Icons.Outlined.HelpOutline, label = stringResource(R.string.account_menu_info), onClick = onInfoClick)
+        Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+            // Accesos agrupados en una sola tarjeta, separados por una línea fina.
+            Surface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surface, shadowElevation = 1.dp) {
+                Column {
+                    MenuRow(icon = Icons.Outlined.Dashboard, label = stringResource(user.role.panelLabelRes()), onClick = onPanelClick)
+                    MenuDivider()
+                    MenuRow(icon = Icons.Outlined.FavoriteBorder, label = stringResource(R.string.account_menu_favorites), onClick = onFavoritesClick)
+                    MenuDivider()
+                    MenuRow(icon = Icons.Outlined.CardGiftcard, label = stringResource(R.string.account_menu_club), onClick = onClubClick)
+                    MenuDivider()
+                    MenuRow(icon = Icons.Outlined.HelpOutline, label = stringResource(R.string.account_menu_info), onClick = onInfoClick)
+                }
+            }
             Surface(
-                onClick = onSignOut,
+                onClick = { confirmSignOut = true },
                 enabled = !isSigningOut,
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-                shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colorScheme.surface,
-                border = BorderStroke(1.dp, ArizColors.Edge),
+                shape = RoundedCornerShape(16.dp),
+                color = ArizColors.Error.copy(alpha = 0.08f),
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 ) {
                     Icon(Icons.AutoMirrored.Outlined.Logout, contentDescription = null, modifier = Modifier.size(20.dp), tint = ArizColors.Error)
                     Text(
@@ -248,20 +253,21 @@ private fun SignedInContent(
 }
 
 @Composable
+private fun MenuDivider() {
+    HorizontalDivider(modifier = Modifier.padding(start = 70.dp), thickness = 1.dp, color = ArizColors.SurfaceMuted)
+}
+
+@Composable
 private fun MenuRow(icon: androidx.compose.ui.graphics.vector.ImageVector, label: String, onClick: () -> Unit) {
-    Surface(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth().height(56.dp),
-        shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surface,
-        border = BorderStroke(1.dp, ArizColors.Edge),
-    ) {
+    Surface(onClick = onClick, modifier = Modifier.fillMaxWidth(), color = androidx.compose.ui.graphics.Color.Transparent) {
         Row(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(22.dp), tint = ArizColors.Brand)
+            Box(Modifier.size(40.dp).background(ArizColors.BrandSoft, RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+                Icon(icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = ArizColors.Brand)
+            }
             Text(
                 text = label,
                 modifier = Modifier.weight(1f),
