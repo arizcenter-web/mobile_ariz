@@ -12,5 +12,6 @@ dependencies {
     implementation(project(":core:designsystem"))
     api(project(":core:model"))
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.coil.compose)
 }
