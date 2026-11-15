@@ -1,5 +1,9 @@
 package com.tecsup.app_ariz.feature.professional.ui
 
+import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -185,10 +189,14 @@ private fun StatsGrid(data: PanelData) {
             )
         }
     }
+    // De dos en dos, con la misma altura; si sobra una, ocupa todo el ancho.
     tiles.chunked(2).forEach { row ->
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            row.forEach { tile -> tile(Modifier.weight(1f)) }
-            if (row.size == 1) Spacer(Modifier.weight(1f))
+        if (row.size == 1) {
+            row.first()(Modifier.fillMaxWidth())
+        } else {
+            Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                row.forEach { tile -> tile(Modifier.weight(1f).fillMaxHeight()) }
+            }
         }
     }
 }
@@ -199,8 +207,8 @@ private fun SubscriptionCard(data: PanelData, onSeePlans: () -> Unit) {
     PanelCard {
         Text(
             text = stringResource(R.string.pro_menu_subscription).uppercase(),
-            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
-            color = ArizColors.Accent,
+            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black, letterSpacing = 1.2.sp),
+            color = ArizColors.Muted,
         )
         Text(
             text = if (data.profile.type.isAgency) {
