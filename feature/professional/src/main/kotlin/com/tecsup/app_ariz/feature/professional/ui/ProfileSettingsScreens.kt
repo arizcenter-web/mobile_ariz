@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.professional.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,12 +34,13 @@ internal fun ProfileScreen(onBackClick: () -> Unit, modifier: Modifier = Modifie
     val state by viewModel.state.collectAsStateWithLifecycle()
     val profile = state.profile
     val form = state.form
+    val leave = rememberLeaveGuard(dirty = state.isDirty && !state.isSaving && !state.isChangingPassword, onLeave = onBackClick)
 
     WithNotice(state.notice, onShown = { viewModel.onAction(ProfileAction.NoticeShown) }, modifier = modifier) {
         PanelPage(
             eyebrow = stringResource(R.string.pro_panel_eyebrow),
             title = stringResource(R.string.pro_profile_title),
-            onBackClick = onBackClick,
+            onBackClick = leave,
             backDescription = stringResource(R.string.pro_back),
         ) {
             when {

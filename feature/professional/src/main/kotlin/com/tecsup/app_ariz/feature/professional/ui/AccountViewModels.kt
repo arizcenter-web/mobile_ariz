@@ -121,6 +121,8 @@ data class ProfileUiState(
     val isLoading: Boolean = true,
     val profile: ProfessionalProfile? = null,
     val form: ProfileUpdate? = null,
+    /** Lo último cargado o guardado: si el formulario es distinto, hay cambios sin guardar. */
+    val baseline: ProfileUpdate? = null,
     val isSaving: Boolean = false,
     val error: AppError? = null,
     val notice: PanelNotice? = null,
@@ -128,7 +130,11 @@ data class ProfileUiState(
     val currentPassword: String = "",
     val newPassword: String = "",
     val isChangingPassword: Boolean = false,
-)
+) {
+    /** Hay datos del perfil editados sin guardar o una contraseña a medio escribir. */
+    val isDirty: Boolean
+        get() = (form != null && form != baseline) || currentPassword.isNotEmpty() || newPassword.isNotEmpty()
+}
 
 sealed interface ProfileAction {
     data object Retry : ProfileAction
@@ -169,7 +175,7 @@ class ProfileViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
             when (val result = getProfile()) {
-                is AppResult.Success -> _state.update { it.copy(isLoading = false, profile = result.data, form = result.data.toForm()) }
+                is AppResult.Success -> _state.update { it.copy(isLoading = false, profile = result.data, form = result.data.toForm(), baseline = result.data.toForm()) }
                 is AppResult.Failure -> _state.update { it.copy(isLoading = false, error = result.error) }
             }
         }
@@ -182,7 +188,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = updateProfile(form)) {
                 is AppResult.Success -> _state.update {
-                    it.copy(isSaving = false, profile = result.data, form = result.data.toForm(), notice = PanelNotice.Success("Perfil actualizado."))
+                    it.copy(isSaving = false, profile = result.data, form = result.data.toForm(), baseline = result.data.toForm(), notice = PanelNotice.Success("Perfil actualizado."))
                 }
                 is AppResult.Failure -> _state.update { it.copy(isSaving = false, notice = PanelNotice.Failure(result.error.message)) }
             }
