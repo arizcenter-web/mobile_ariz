@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.projects.ui.list
 
+import com.tecsup.app_ariz.core.ui.statusBarScrim
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -22,6 +24,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -54,6 +57,8 @@ import com.tecsup.app_ariz.core.designsystem.component.ArizDropdownField
 import com.tecsup.app_ariz.core.designsystem.component.ArizPrimaryButton
 import com.tecsup.app_ariz.core.designsystem.component.ArizTextField
 import com.tecsup.app_ariz.core.designsystem.theme.ArizColors
+import com.tecsup.app_ariz.core.ui.component.EyebrowChip
+import com.tecsup.app_ariz.core.ui.component.PanelHeader
 import com.tecsup.app_ariz.core.designsystem.theme.ArizTheme
 import com.tecsup.app_ariz.core.model.common.Currency
 import com.tecsup.app_ariz.core.model.project.ProjectOriginFilter
@@ -109,7 +114,7 @@ fun ProjectListContent(
 
     LazyColumn(
         state = listState,
-        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas),
+        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas).statusBarScrim(),
         contentPadding = PaddingValues(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -118,20 +123,20 @@ fun ProjectListContent(
         item(key = "map") {
             Surface(
                 onClick = onMapClick,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(44.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.surface,
-                border = BorderStroke(1.dp, ArizColors.Brand),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp).height(50.dp),
+                shape = RoundedCornerShape(16.dp),
+                color = ArizColors.BrandSoft,
             ) {
-                Box(contentAlignment = Alignment.Center) {
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Outlined.Map, contentDescription = null, modifier = Modifier.size(20.dp), tint = ArizColors.Brand)
                     Text(stringResource(R.string.projects_map_button), style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold), color = ArizColors.Brand)
                 }
             }
         }
         item(key = "filters") {
-            FiltersCard(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp))
+            FiltersCard(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 20.dp))
         }
-        item(key = "header") { ResultsHeader(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp)) }
+        item(key = "header") { ResultsHeader(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 20.dp)) }
 
         when {
             state.isLoading -> item(key = "loading") {
@@ -146,10 +151,9 @@ fun ProjectListContent(
 
             state.items.isEmpty() -> item(key = "empty") {
                 Surface(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = ArizColors.SurfaceMuted,
-                    border = BorderStroke(1.dp, ArizColors.Edge),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    color = MaterialTheme.colorScheme.surface,
                 ) {
                     Text(
                         text = stringResource(R.string.projects_empty),
@@ -166,7 +170,7 @@ fun ProjectListContent(
                     ProjectListItem(
                         project = project,
                         onClick = { onProjectClick(project.slug) },
-                        modifier = Modifier.padding(horizontal = 16.dp),
+                        modifier = Modifier.padding(horizontal = 20.dp),
                     )
                 }
                 if (state.isLoadingMore) item(key = "more") {
@@ -186,46 +190,23 @@ fun ProjectListContent(
 /** Cabecera azul del directorio: etiqueta, titular con "en el Perú" en amarillo y subtítulo. */
 @Composable
 private fun Hero(onBackClick: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(ArizColors.Brand)
-            .statusBarsPadding()
-            .padding(start = 8.dp, end = 20.dp, bottom = 28.dp),
-    ) {
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier.padding(top = 8.dp).background(Color.White.copy(alpha = 0.12f), CircleShape),
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                contentDescription = stringResource(R.string.projects_back),
-                tint = Color.White,
-            )
-        }
-        Column(modifier = Modifier.padding(start = 12.dp, top = 16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(
-                text = stringResource(R.string.projects_hero_badge),
-                modifier = Modifier
-                    .background(Color.White.copy(alpha = 0.12f), RoundedCornerShape(50))
-                    .padding(horizontal = 12.dp, vertical = 5.dp),
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Black, letterSpacing = 1.6.sp),
-                color = ArizColors.Accent,
-            )
-            Text(
-                text = buildAnnotatedString {
-                    append(stringResource(R.string.projects_hero_title_1))
-                    withStyle(SpanStyle(color = ArizColors.Accent)) { append(stringResource(R.string.projects_hero_title_2)) }
-                },
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black),
-                color = Color.White,
-            )
-            Text(
-                text = stringResource(R.string.projects_hero_subtitle),
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.White.copy(alpha = 0.85f),
-            )
-        }
+    PanelHeader(onBackClick = onBackClick, backDescription = stringResource(R.string.projects_back)) {
+        EyebrowChip(stringResource(R.string.projects_hero_badge))
+        Text(
+            text = buildAnnotatedString {
+                append(stringResource(R.string.projects_hero_title_1))
+                withStyle(SpanStyle(color = ArizColors.Accent)) { append(stringResource(R.string.projects_hero_title_2)) }
+            },
+            modifier = Modifier.padding(top = 12.dp),
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black),
+            color = Color.White,
+        )
+        Text(
+            text = stringResource(R.string.projects_hero_subtitle),
+            modifier = Modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.White.copy(alpha = 0.78f),
+        )
     }
 }
 
@@ -233,7 +214,7 @@ private fun Hero(onBackClick: () -> Unit) {
 @Composable
 private fun StageChips(selected: ProjectStage?, onSelected: (ProjectStage?) -> Unit) {
     val options: List<ProjectStage?> = listOf(null) + ProjectStage.entries
-    LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    LazyRow(contentPadding = PaddingValues(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         items(options, key = { it?.name ?: "all" }) { stage ->
             val isSelected = stage == selected
             Text(
@@ -255,12 +236,11 @@ private fun StageChips(selected: ProjectStage?, onSelected: (ProjectStage?) -> U
 private fun FiltersCard(state: ProjectListUiState, onAction: (ProjectListAction) -> Unit, modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.large,
+        shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surface,
-        border = BorderStroke(1.dp, ArizColors.Edge),
-        shadowElevation = 2.dp,
+        shadowElevation = 1.dp,
     ) {
-        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             ArizTextField(
                 value = state.districtText,
                 onValueChange = { onAction(ProjectListAction.DistrictChanged(it)) },
@@ -312,7 +292,7 @@ private fun ResultsHeader(state: ProjectListUiState, onAction: (ProjectListActio
             Text(
                 text = stringResource(R.string.projects_results_eyebrow),
                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.8.sp),
-                color = ArizColors.Accent,
+                color = ArizColors.Muted,
             )
             Text(
                 text = stringResource(R.string.projects_results_title),
