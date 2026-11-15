@@ -21,4 +21,9 @@
     <string name="favorites_signed_out_title">Guarda tus favoritos</string>
     <string name="favorites_signed_out_description">Inicia sesión para guardar propiedades y volver a ellas cuando quieras.</string>
     <string name="favorites_signed_out_action">Iniciar sesión</string>
+    <string name="favorites_remove_confirm_title">¿Quitar de favoritos?</string>
+    <string name="favorites_remove_confirm_text">"%1$s" dejará de estar en tu lista de favoritos.</string>
+    <string name="favorites_remove_confirm_action">Sí, quitar</string>
+    <string name="favorites_remove_confirm_eyebrow">Tu lista de favoritos</string>
+    <string name="favorites_remove_cancel">Cancelar</string>
 </resources>
