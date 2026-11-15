@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.professional.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -99,10 +100,11 @@ internal fun PropertyFormContent(
     val errorTexts = PropertyField.entries.associateWith { field -> state.errors[field]?.let { stringResource(it.textRes()) } }
     fun err(field: PropertyField): String? = errorTexts[field]
 
+    val leave = rememberLeaveGuard(dirty = state.isDirty && !state.isSaving, onLeave = onBackClick)
     PanelPage(
         eyebrow = stringResource(R.string.pro_panel_eyebrow),
         title = stringResource(if (state.isEditing) R.string.pro_form_title_edit else R.string.pro_form_title_new),
-        onBackClick = onBackClick,
+        onBackClick = leave,
         backDescription = stringResource(R.string.pro_back),
         modifier = modifier,
     ) {

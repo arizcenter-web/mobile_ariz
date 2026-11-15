@@ -28,13 +28,17 @@ data class PropertyFormUiState(
     val isEditing: Boolean = false,
     val isLoading: Boolean = false,
     val draft: PropertyDraft = PropertyDraft(),
+    /** Lo último guardado (o cargado): si el borrador es distinto, hay cambios sin guardar. */
+    val baseline: PropertyDraft = PropertyDraft(),
     val errors: Map<PropertyField, PropertyFieldError> = emptyMap(),
     /** Fotos que se están subiendo a Cloudinary. */
     val uploading: Int = 0,
     val isSaving: Boolean = false,
     val error: AppError? = null,
     val photoError: String? = null,
-)
+) {
+    val isDirty: Boolean get() = !isLoading && draft != baseline
+}
 
 sealed interface PropertyFormAction {
     data class Edit(val change: (PropertyDraft) -> PropertyDraft) : PropertyFormAction
@@ -97,7 +101,7 @@ class PropertyFormViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
             when (val result = getDraft(id)) {
-                is AppResult.Success -> _state.update { it.copy(isLoading = false, draft = result.data) }
+                is AppResult.Success -> _state.update { it.copy(isLoading = false, draft = result.data, baseline = result.data) }
                 is AppResult.Failure -> _state.update { it.copy(isLoading = false, error = result.error) }
             }
         }
@@ -132,6 +136,7 @@ class PropertyFormViewModel @Inject constructor(
                 is AppResult.Failure -> _state.update { it.copy(isSaving = false, error = saved.error) }
                 is AppResult.Success -> {
                     savedId = saved.data.id
+                    _state.update { it.copy(baseline = current.draft) }
                     if (!publish) {
                         _state.update { it.copy(isSaving = false) }
                         _events.send(PropertyFormEvent.Saved(published = false))
