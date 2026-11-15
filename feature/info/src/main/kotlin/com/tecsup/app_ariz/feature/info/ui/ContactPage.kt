@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.info.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -76,11 +77,12 @@ internal fun ContactContent(
     val uriHandler = LocalUriHandler.current
     val topicLabel = stringResource(state.topic.labelRes())
 
+    val leave = rememberLeaveGuard(dirty = state.isDirty && !state.isSending, onLeave = onBackClick)
     InfoPageLayout(
         eyebrow = stringResource(R.string.info_contact_eyebrow),
         title = stringResource(R.string.info_contact_title),
         subtitle = stringResource(R.string.info_contact_subtitle),
-        onBackClick = onBackClick,
+        onBackClick = leave,
         modifier = modifier.imePadding(),
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {

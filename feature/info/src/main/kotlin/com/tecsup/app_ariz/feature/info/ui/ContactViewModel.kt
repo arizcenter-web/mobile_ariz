@@ -32,7 +32,10 @@ data class ContactUiState(
     val isSending: Boolean = false,
     val error: AppError? = null,
     val sent: Boolean = false,
-)
+) {
+    /** Hay datos escritos que todavía no se enviaron. */
+    val isDirty: Boolean get() = !sent && (name.isNotBlank() || email.isNotBlank() || phone.isNotBlank() || message.isNotBlank())
+}
 
 sealed interface ContactAction {
     data class NameChanged(val value: String) : ContactAction
