@@ -25,7 +25,10 @@ data class ClaimUiState(
     val error: AppError? = null,
     /** Tras enviar se muestra el código del reclamo en lugar del formulario. */
     val receipt: ClaimReceipt? = null,
-)
+) {
+    /** Hay datos escritos que todavía no se enviaron. */
+    val isDirty: Boolean get() = receipt == null && draft != ClaimDraft()
+}
 
 @HiltViewModel
 class ClaimViewModel @Inject constructor(private val repository: ClaimRepository) : ViewModel() {

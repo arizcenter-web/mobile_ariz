@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.info.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,11 +35,12 @@ internal fun ClaimsPage(onBackClick: () -> Unit, modifier: Modifier = Modifier, 
     val errorTexts = ClaimField.entries.associateWith { field -> state.errors[field]?.let { stringResource(it.textRes()) } }
     fun error(field: ClaimField): String? = errorTexts[field]
 
+    val leave = rememberLeaveGuard(dirty = state.isDirty && !state.isSending, onLeave = onBackClick)
     InfoPageLayout(
         eyebrow = stringResource(R.string.info_claims_eyebrow),
         title = stringResource(R.string.info_claims_title),
         subtitle = stringResource(R.string.info_claims_subtitle),
-        onBackClick = onBackClick,
+        onBackClick = leave,
         modifier = modifier.imePadding(),
     ) {
         val receipt = state.receipt
