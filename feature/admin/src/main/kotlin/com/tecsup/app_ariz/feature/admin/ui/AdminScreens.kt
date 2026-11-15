@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.admin.ui
 
+import com.tecsup.app_ariz.core.ui.component.ConfirmTone
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.BorderStroke
@@ -272,6 +273,7 @@ fun AdminSectionScreen(
                 text = stringResource(R.string.adm_confirm_text, request.item.title),
                 confirmLabel = stringResource(R.string.adm_confirm),
                 dismissLabel = stringResource(R.string.adm_cancel),
+                tone = if (request.action.destructive) ConfirmTone.DANGER else ConfirmTone.NEUTRAL,
                 onConfirm = {
                     viewModel.run(request.action, request.item.id, null)
                     pending = null
@@ -342,7 +344,7 @@ private fun ItemCard(
         if (expanded) {
             shown.fields.forEach { field ->
                 Column {
-                    Text(field.label, style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = ArizColors.Accent)
+                    Text(field.label, style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = ArizColors.Muted)
                     androidx.compose.foundation.text.selection.SelectionContainer {
                         Text(field.value, style = MaterialTheme.typography.bodySmall, color = ArizColors.Ink)
                     }
@@ -359,7 +361,7 @@ private fun ItemCard(
         ActionRow(item, busy, onAction)
         val groups = if (expanded && detail != null) detail.groups else item.groups
         groups.forEach { group ->
-            Text(group.label.uppercase(), style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black), color = ArizColors.Accent)
+            Text(group.label.uppercase(), style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black), color = ArizColors.Muted)
             group.items.forEach { child ->
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
