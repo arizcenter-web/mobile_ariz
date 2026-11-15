@@ -99,7 +99,7 @@ private fun AgencyContact(name: String) {
         Text(
             text = stringResource(R.string.pro_agency_notice_title).uppercase(),
             style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
-            color = ArizColors.Accent,
+            color = ArizColors.Muted,
         )
         Text(stringResource(R.string.pro_agency_title), style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Black), color = ArizColors.Brand)
         Text(stringResource(R.string.pro_agency_text), style = MaterialTheme.typography.bodyMedium, color = ArizColors.Muted)
@@ -117,7 +117,7 @@ private fun CurrentPlan(subscription: Subscription?) {
         Text(
             text = stringResource(R.string.pro_subscription_current).uppercase(),
             style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
-            color = ArizColors.Accent,
+            color = ArizColors.Muted,
         )
         if (subscription == null) {
             Text(stringResource(R.string.pro_subscription_none), style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = ArizColors.Ink)
