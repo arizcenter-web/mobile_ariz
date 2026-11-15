@@ -42,6 +42,9 @@ import kotlinx.coroutines.launch
 /** Tiempo mínimo que se ve la pantalla de bienvenida (el logo entra, aparece el nombre y respira un instante). */
 private const val MinSplashMillis = 2600L
 
+/** Tope de la bienvenida aunque la sesión no haya terminado de validarse (por ejemplo, sin internet). */
+private const val MaxSplashMillis = 6000L
+
 /**
  * Pantalla de bienvenida de marca: fondo blanco, el logo entra con un resorte, el nombre sube con fade, una línea
  * dorada se dibuja y una barra de carga fina cierra la secuencia. Avisa con [onFinished] cuando [ready] es verdadero
@@ -83,6 +86,11 @@ fun ArizSplash(ready: Boolean, onFinished: () -> Unit, modifier: Modifier = Modi
     // Termina cuando pasó el tiempo mínimo y la sesión ya se validó.
     LaunchedEffect(ready, minElapsed.value) {
         if (ready && minElapsed.value >= 1f) onFinished()
+    }
+    // Sin conexión la validación de la sesión puede tardar mucho: la bienvenida nunca dura más que este tope.
+    LaunchedEffect(Unit) {
+        delay(MaxSplashMillis)
+        onFinished()
     }
 
     Box(modifier.fillMaxSize().background(Color.White)) {
