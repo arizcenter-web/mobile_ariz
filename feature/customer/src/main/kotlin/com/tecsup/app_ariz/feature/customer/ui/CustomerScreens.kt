@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.customer.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -214,7 +215,7 @@ private fun CurrentMembership(summary: MembershipSummary) {
         Text(
             text = stringResource(R.string.cus_membership_current).uppercase(),
             style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
-            color = ArizColors.Accent,
+            color = ArizColors.Muted,
         )
         val m = summary.membership
         if (m == null) {
@@ -264,6 +265,7 @@ fun CustomerProfileScreen(onBackClick: () -> Unit, modifier: Modifier = Modifier
     val state by viewModel.state.collectAsStateWithLifecycle()
     val profile = state.profile
     val form = state.form
+    val leave = rememberLeaveGuard(dirty = state.isDirty && !state.isSaving && !state.isChangingPassword, onLeave = onBackClick)
     val saved = stringResource(R.string.cus_profile_saved)
     val missing = stringResource(R.string.cus_password_missing)
     val done = stringResource(R.string.cus_password_done)
@@ -272,7 +274,7 @@ fun CustomerProfileScreen(onBackClick: () -> Unit, modifier: Modifier = Modifier
         PanelPage(
             eyebrow = stringResource(R.string.cus_eyebrow),
             title = stringResource(R.string.cus_profile_title),
-            onBackClick = onBackClick,
+            onBackClick = leave,
             backDescription = stringResource(R.string.cus_back),
         ) {
             when {

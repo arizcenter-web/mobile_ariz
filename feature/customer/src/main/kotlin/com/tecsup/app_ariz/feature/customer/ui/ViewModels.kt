@@ -127,13 +127,18 @@ data class CustomerProfileUiState(
     val isLoading: Boolean = true,
     val profile: CustomerProfile? = null,
     val form: CustomerProfileUpdate? = null,
+    /** Lo último cargado o guardado: si el formulario es distinto, hay cambios sin guardar. */
+    val baseline: CustomerProfileUpdate? = null,
     val isSaving: Boolean = false,
     val error: AppError? = null,
     val notice: CustomerNotice? = null,
     val currentPassword: String = "",
     val newPassword: String = "",
     val isChangingPassword: Boolean = false,
-)
+) {
+    val isDirty: Boolean
+        get() = (form != null && form != baseline) || currentPassword.isNotEmpty() || newPassword.isNotEmpty()
+}
 
 @HiltViewModel
 class CustomerProfileViewModel @Inject constructor(
@@ -152,7 +157,7 @@ class CustomerProfileViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
             when (val result = getProfile()) {
-                is AppResult.Success -> _state.update { it.copy(isLoading = false, profile = result.data, form = result.data.toForm()) }
+                is AppResult.Success -> _state.update { it.copy(isLoading = false, profile = result.data, form = result.data.toForm(), baseline = result.data.toForm()) }
                 is AppResult.Failure -> _state.update { it.copy(isLoading = false, error = result.error) }
             }
         }
@@ -170,7 +175,7 @@ class CustomerProfileViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = updateProfile(form)) {
                 is AppResult.Success -> _state.update {
-                    it.copy(isSaving = false, profile = result.data, form = result.data.toForm(), notice = CustomerNotice.Success(successMessage))
+                    it.copy(isSaving = false, profile = result.data, form = result.data.toForm(), baseline = result.data.toForm(), notice = CustomerNotice.Success(successMessage))
                 }
                 is AppResult.Failure -> _state.update { it.copy(isSaving = false, notice = CustomerNotice.Failure(result.error.message)) }
             }
