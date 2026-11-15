@@ -89,4 +89,9 @@
     <string name="rewards_availability_inmediata">Inmediata</string>
     <string name="rewards_availability_averiguar">Averiguar</string>
     <string name="rewards_availability_por_confirmar">Por confirmar</string>
+    <string name="rewards_leave_confirm_title">¿Salir del club?</string>
+    <string name="rewards_leave_confirm_text">Se cerrará tu acceso con el código de referente. Podrás volver a entrar cuando quieras.</string>
+    <string name="rewards_leave_confirm_action">Sí, salir</string>
+    <string name="rewards_leave_confirm_eyebrow">Programa de referentes</string>
+    <string name="rewards_leave_confirm_cancel">Cancelar</string>
 </resources>

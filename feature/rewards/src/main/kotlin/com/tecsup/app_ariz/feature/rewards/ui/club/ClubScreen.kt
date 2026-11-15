@@ -1,5 +1,11 @@
 package com.tecsup.app_ariz.feature.rewards.ui.club
 
+import com.tecsup.app_ariz.core.ui.component.ConfirmTone
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableStateOf
+import com.tecsup.app_ariz.core.ui.component.ConfirmDialog
+import com.tecsup.app_ariz.core.ui.statusBarScrim
 import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -58,6 +64,7 @@ import com.tecsup.app_ariz.core.designsystem.component.ArizAlert
 import com.tecsup.app_ariz.core.designsystem.component.ArizPrimaryButton
 import com.tecsup.app_ariz.core.designsystem.component.ArizTextField
 import com.tecsup.app_ariz.core.designsystem.theme.ArizColors
+import com.tecsup.app_ariz.core.ui.component.PanelHeader
 import com.tecsup.app_ariz.core.ui.LightStatusBarIcons
 import com.tecsup.app_ariz.core.ui.format.publishedLabel
 import com.tecsup.app_ariz.feature.rewards.R
@@ -214,7 +221,7 @@ private fun CodeStep(state: ClubUiState, onAction: (ClubAction) -> Unit, onBackC
 private fun BackArrow(onClick: () -> Unit) {
     IconButton(
         onClick = onClick,
-        modifier = Modifier.padding(start = 8.dp, top = 8.dp).background(Color.White.copy(alpha = 0.15f), CircleShape),
+        modifier = Modifier.padding(start = 20.dp, top = 12.dp, bottom = 8.dp).size(44.dp).background(Color.White.copy(alpha = 0.14f), CircleShape),
     ) {
         Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = stringResource(R.string.rewards_back), tint = Color.White)
     }
@@ -232,9 +239,25 @@ private fun ClubStep(
     val context = LocalContext.current
     val shareText = stringResource(R.string.rewards_share_text, referrer.name, referrer.code)
     val shareTitle = stringResource(R.string.rewards_share_title)
+    var confirmLeave by rememberSaveable { mutableStateOf(false) }
+    if (confirmLeave) {
+        ConfirmDialog(
+            title = stringResource(R.string.rewards_leave_confirm_title),
+            text = stringResource(R.string.rewards_leave_confirm_text),
+            confirmLabel = stringResource(R.string.rewards_leave_confirm_action),
+            dismissLabel = stringResource(R.string.rewards_leave_confirm_cancel),
+            tone = ConfirmTone.WARNING,
+            eyebrow = stringResource(R.string.rewards_leave_confirm_eyebrow),
+            onConfirm = {
+                confirmLeave = false
+                onAction(ClubAction.LeaveClub)
+            },
+            onDismiss = { confirmLeave = false },
+        )
+    }
 
     LazyColumn(
-        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas),
+        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas).statusBarScrim(),
         contentPadding = PaddingValues(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -253,7 +276,7 @@ private fun ClubStep(
                     context.startActivity(Intent.createChooser(intent, shareTitle))
                 },
                 onRefer = { onAction(ClubAction.ReferralFormOpened) },
-                onLeave = { onAction(ClubAction.LeaveClub) },
+                onLeave = { confirmLeave = true },
             )
         }
         item(key = "banner") { Banner(points = state.points, code = referrer.code, modifier = Modifier.padding(horizontal = 16.dp)) }
@@ -318,39 +341,37 @@ private fun Hero(
     onRefer: () -> Unit,
     onLeave: () -> Unit,
 ) {
-    Column(modifier = Modifier.fillMaxWidth().background(ArizColors.Brand).statusBarsPadding().padding(bottom = 24.dp)) {
-        BackArrow(onClick = onBackClick)
-        Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    PanelHeader(onBackClick = onBackClick, backDescription = stringResource(R.string.rewards_back)) {
+        Text(
+            text = stringResource(R.string.rewards_hero_greeting, referrer.name),
+            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+            color = Color.White.copy(alpha = 0.9f),
+        )
+        Text(
+            text = stringResource(R.string.rewards_hero_points_label).uppercase(),
+            modifier = Modifier.padding(top = 10.dp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.6.sp),
+            color = ArizColors.Accent,
+        )
+        Text(
+            text = stringResource(R.string.rewards_hero_points, PointsFormat.format(points)),
+            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Black),
+            color = Color.White,
+        )
+        if (campaignPoints > 0) {
             Text(
-                text = stringResource(R.string.rewards_hero_greeting, referrer.name),
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                color = Color.White.copy(alpha = 0.9f),
-            )
-            Text(
-                text = stringResource(R.string.rewards_hero_points_label).uppercase(),
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.6.sp),
-                color = ArizColors.Accent,
-            )
-            Text(
-                text = stringResource(R.string.rewards_hero_points, PointsFormat.format(points)),
-                style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Black),
-                color = Color.White,
-            )
-            if (campaignPoints > 0) {
-                Text(
-                    text = stringResource(R.string.rewards_hero_campaign_points, PointsFormat.format(campaignPoints)),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White.copy(alpha = 0.8f),
-                )
-            }
-            Text(
-                text = stringResource(R.string.rewards_hero_code, referrer.code),
-                modifier = Modifier.padding(top = 4.dp),
-                style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold),
-                color = Color.White.copy(alpha = 0.85f),
+                text = stringResource(R.string.rewards_hero_campaign_points, PointsFormat.format(campaignPoints)),
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White.copy(alpha = 0.8f),
             )
         }
-        Row(modifier = Modifier.padding(horizontal = 20.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(
+            text = stringResource(R.string.rewards_hero_code, referrer.code),
+            modifier = Modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold),
+            color = Color.White.copy(alpha = 0.85f),
+        )
+        Row(modifier = Modifier.padding(top = 20.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             HeroButton(stringResource(R.string.rewards_action_refer), primary = true, onClick = onRefer, modifier = Modifier.weight(1.3f))
             HeroButton(stringResource(R.string.rewards_action_share), primary = false, onClick = onShare, modifier = Modifier.weight(1f), icon = true)
             HeroButton(stringResource(R.string.rewards_action_leave), primary = false, onClick = onLeave, modifier = Modifier.weight(0.8f))
