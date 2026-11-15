@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.admin.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -102,6 +103,8 @@ fun SitePlanScreen(onBackClick: () -> Unit, modifier: Modifier = Modifier, viewM
     val state by viewModel.state.collectAsStateWithLifecycle()
     var dialog by remember { mutableStateOf<PlanDialog?>(null) }
     var mapOpen by rememberSaveable { mutableStateOf(false) }
+    // Con cambios del plano sin guardar, salir pide confirmación (dentro del editor de mapa el atrás solo cierra el mapa).
+    val leave = rememberLeaveGuard(dirty = state.dirty && !mapOpen, onLeave = onBackClick)
     val host = remember { SnackbarHostState() }
     val savedText = stringResource(R.string.adm_plan_saved)
     val publishedText = stringResource(R.string.adm_plan_published)
@@ -123,7 +126,7 @@ fun SitePlanScreen(onBackClick: () -> Unit, modifier: Modifier = Modifier, viewM
             eyebrow = stringResource(R.string.adm_eyebrow),
             title = stringResource(R.string.adm_plan_title),
             subtitle = state.doc?.projectName,
-            onBackClick = onBackClick,
+            onBackClick = leave,
             backDescription = stringResource(R.string.adm_back),
         ) {
             val doc = state.doc
