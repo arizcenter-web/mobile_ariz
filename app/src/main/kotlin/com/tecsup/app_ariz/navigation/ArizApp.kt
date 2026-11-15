@@ -102,9 +102,6 @@ fun ArizApp(viewModel: MainViewModel = hiltViewModel()) {
         currentDestination?.hierarchy?.any { it.hasRoute(destination.routeClass) } == true
     }
 
-    // Inicio y Buscar tienen una cabecera que llega hasta arriba: solo respetan la barra inferior.
-    val isHome = currentDestination?.hierarchy?.any { it.hasRoute(HomeRoute::class) || it.hasRoute(SearchRoute::class) } == true
-
     val openProperty: (String) -> Unit = { slug -> navController.navigate(PropertyDetailRoute(slug)) }
     val openAgent: (String) -> Unit = { id -> navController.navigate(AgentProfileRoute(id)) }
     val openLogin: () -> Unit = { navController.navigate(AuthRoute) }
@@ -128,12 +125,9 @@ fun ArizApp(viewModel: MainViewModel = hiltViewModel()) {
             navController = navController,
             startDestination = HomeRoute,
             // Las pantallas de auth gestionan sus propios insets (foto a pantalla completa).
-            // El inicio dibuja su hero bajo la barra de estado: solo respeta la barra inferior.
-            modifier = when {
-                !showBottomBar -> Modifier
-                isHome -> Modifier.padding(bottom = innerPadding.calculateBottomPadding())
-                else -> Modifier.padding(innerPadding)
-            },
+            // Las pestañas dibujan su cabecera bajo la barra de estado (Inicio, Buscar, Favoritos, Cuenta):
+            // solo respetan la barra inferior; cada pantalla se ocupa de su inset superior.
+            modifier = if (showBottomBar) Modifier.padding(bottom = innerPadding.calculateBottomPadding()) else Modifier,
         ) {
             homeScreen(
                 onDestinationClick = { destination ->
