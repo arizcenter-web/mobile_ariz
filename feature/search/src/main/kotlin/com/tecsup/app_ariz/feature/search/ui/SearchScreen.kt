@@ -1,7 +1,10 @@
 package com.tecsup.app_ariz.feature.search.ui
 
+import com.tecsup.app_ariz.core.ui.statusBarScrim
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.shape.RoundedCornerShape
 import com.tecsup.app_ariz.core.ui.LightStatusBarIcons
+import com.tecsup.app_ariz.core.ui.component.TabHeader
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Icon
@@ -121,13 +124,13 @@ fun SearchContent(
 
     LazyColumn(
         state = listState,
-        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas),
+        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas).statusBarScrim(),
         contentPadding = PaddingValues(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         item(key = "hero") { SearchHero() }
-        item(key = "filters") { FiltersCard(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp)) }
-        item(key = "header") { ResultsHeader(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 16.dp)) }
+        item(key = "filters") { FiltersCard(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 20.dp)) }
+        item(key = "header") { ResultsHeader(state = state, onAction = onAction, modifier = Modifier.padding(horizontal = 20.dp)) }
 
         when {
             state.isLoading -> item(key = "loading") {
@@ -178,12 +181,11 @@ fun SearchContent(
 private fun FiltersCard(state: SearchUiState, onAction: (SearchAction) -> Unit, modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.large,
+        shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surface,
-        border = BorderStroke(1.dp, ArizColors.Edge),
-        shadowElevation = 6.dp,
+        shadowElevation = 1.dp,
     ) {
-        Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             ArizTextField(
                 value = state.districtText,
                 onValueChange = { onAction(SearchAction.DistrictChanged(it)) },
@@ -281,30 +283,11 @@ private fun FiltersCard(state: SearchUiState, onAction: (SearchAction) -> Unit, 
 /** Cabecera azul de la pestaña: dibuja bajo la barra de estado y deja respirar la tarjeta de filtros. */
 @Composable
 private fun SearchHero() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(ArizColors.Brand)
-            .statusBarsPadding()
-            .padding(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 24.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        Text(
-            text = stringResource(R.string.search_hero_eyebrow),
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Black, letterSpacing = 1.8.sp),
-            color = ArizColors.Accent,
-        )
-        Text(
-            text = stringResource(R.string.search_heading),
-            style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Black),
-            color = Color.White,
-        )
-        Text(
-            text = stringResource(R.string.search_hero_subtitle),
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.White.copy(alpha = 0.8f),
-        )
-    }
+    TabHeader(
+        eyebrow = stringResource(R.string.search_hero_eyebrow),
+        title = stringResource(R.string.search_heading),
+        subtitle = stringResource(R.string.search_hero_subtitle),
+    )
 }
 
 @Composable
