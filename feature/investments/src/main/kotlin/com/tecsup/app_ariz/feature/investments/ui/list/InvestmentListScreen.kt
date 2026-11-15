@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.investments.ui.list
 
+import com.tecsup.app_ariz.core.ui.statusBarScrim
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -49,6 +50,7 @@ import coil.compose.AsyncImage
 import com.tecsup.app_ariz.core.common.ArizContact
 import com.tecsup.app_ariz.core.designsystem.component.ArizPrimaryButton
 import com.tecsup.app_ariz.core.designsystem.theme.ArizColors
+import com.tecsup.app_ariz.core.ui.component.PanelHeader
 import com.tecsup.app_ariz.core.model.common.Currency
 import com.tecsup.app_ariz.core.ui.LightStatusBarIcons
 import com.tecsup.app_ariz.core.ui.format.formatPrice
@@ -88,7 +90,7 @@ fun InvestmentListContent(
     val advisorUrl = ArizContact.whatsappUrl(stringResource(R.string.investments_whatsapp_general))
 
     LazyColumn(
-        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas),
+        modifier = modifier.fillMaxSize().background(ArizColors.SectionCanvas).statusBarScrim(),
         contentPadding = PaddingValues(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -162,41 +164,32 @@ fun InvestmentListContent(
 
 @Composable
 private fun Hero(onBackClick: () -> Unit, onAdvisorClick: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().background(ArizColors.Brand).statusBarsPadding().padding(bottom = 28.dp)) {
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier.padding(start = 8.dp, top = 8.dp).background(Color.White.copy(alpha = 0.15f), CircleShape),
+    PanelHeader(onBackClick = onBackClick, backDescription = stringResource(R.string.investments_back)) {
+        Text(
+            text = stringResource(R.string.investments_hero_title),
+            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black, lineHeight = 34.sp),
+            color = Color.White,
+        )
+        Text(
+            text = stringResource(R.string.investments_hero_subtitle),
+            modifier = Modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.White.copy(alpha = 0.78f),
+        )
+        Surface(
+            onClick = onAdvisorClick,
+            modifier = Modifier.padding(top = 20.dp).height(46.dp),
+            shape = RoundedCornerShape(50),
+            color = ArizColors.Accent,
         ) {
-            Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = stringResource(R.string.investments_back), tint = Color.White)
-        }
-        Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(
-                text = stringResource(R.string.investments_hero_title),
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black, lineHeight = 34.sp),
-                color = Color.White,
-            )
-            Text(
-                text = stringResource(R.string.investments_hero_subtitle),
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.White.copy(alpha = 0.8f),
-            )
-            Surface(
-                onClick = onAdvisorClick,
-                modifier = Modifier.padding(top = 4.dp).height(44.dp),
-                shape = MaterialTheme.shapes.medium,
-                color = Color.White.copy(alpha = 0.12f),
-                border = BorderStroke(1.dp, Color.White.copy(alpha = 0.2f)),
-            ) {
-                Box(modifier = Modifier.padding(horizontal = 20.dp), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = stringResource(R.string.investments_hero_advisor),
-                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Black),
-                        color = Color.White,
-                    )
-                }
+            Box(modifier = Modifier.padding(horizontal = 24.dp), contentAlignment = Alignment.Center) {
+                Text(
+                    text = stringResource(R.string.investments_hero_advisor),
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Black),
+                    color = ArizColors.Brand,
+                )
             }
         }
-        Box(Modifier.fillMaxWidth().height(4.dp).background(ArizColors.Accent))
     }
 }
 
