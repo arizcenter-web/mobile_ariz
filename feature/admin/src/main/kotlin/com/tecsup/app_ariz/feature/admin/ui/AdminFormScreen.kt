@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.admin.ui
 
+import com.tecsup.app_ariz.core.ui.component.rememberLeaveGuard
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,11 +46,12 @@ fun AdminFormScreen(onBackClick: () -> Unit, onSaved: () -> Unit, modifier: Modi
     val state by viewModel.state.collectAsStateWithLifecycle()
     val spec = state.section?.form
     LaunchedEffect(viewModel) { viewModel.saved.collect { onSaved() } }
+    val leave = rememberLeaveGuard(dirty = state.isDirty && !state.isSaving, onLeave = onBackClick)
 
     PanelPage(
         eyebrow = stringResource(R.string.adm_eyebrow),
         title = stringResource(if (state.isEditing) R.string.adm_form_edit else R.string.adm_form_new) + " " + spec?.title.orEmpty().lowercase(),
-        onBackClick = onBackClick,
+        onBackClick = leave,
         backDescription = stringResource(R.string.adm_back),
         modifier = modifier,
     ) {

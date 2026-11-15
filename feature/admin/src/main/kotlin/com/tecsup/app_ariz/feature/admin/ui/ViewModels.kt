@@ -165,6 +165,8 @@ data class FormUiState(
     val isEditing: Boolean = false,
     val isLoading: Boolean = false,
     val values: Map<String, String> = emptyMap(),
+    /** Lo último guardado (o cargado): si los valores son distintos, hay cambios sin guardar. */
+    val baseline: Map<String, String> = emptyMap(),
     /** Claves con valor faltante o inválido. */
     val invalid: Set<String> = emptySet(),
     val uploading: Boolean = false,
@@ -172,7 +174,9 @@ data class FormUiState(
     val error: AppError? = null,
     /** Opciones traídas del backend, por clave de campo. */
     val options: Map<String, List<AdminChoice>> = emptyMap(),
-)
+) {
+    val isDirty: Boolean get() = !isLoading && values != baseline
+}
 
 @HiltViewModel
 class AdminFormViewModel @Inject constructor(
@@ -191,6 +195,7 @@ class AdminFormViewModel @Inject constructor(
             isEditing = itemId != null,
             isLoading = itemId != null,
             values = section?.form?.fields?.associate { it.key to it.default }.orEmpty(),
+            baseline = section?.form?.fields?.associate { it.key to it.default }.orEmpty(),
         ),
     )
     val state: StateFlow<FormUiState> = _state.asStateFlow()
@@ -222,7 +227,7 @@ class AdminFormViewModel @Inject constructor(
                     val item = result.data.firstOrNull { it.id == id } ?: findInOtherFilters(section, id)
                     _state.update {
                         if (item == null) it.copy(isLoading = false, error = AppError.NotFound())
-                        else it.copy(isLoading = false, values = it.values + item.values)
+                        else it.copy(isLoading = false, values = it.values + item.values, baseline = it.values + item.values)
                     }
                 }
                 is AppResult.Failure -> _state.update { it.copy(isLoading = false, error = result.error) }
@@ -263,7 +268,7 @@ class AdminFormViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = save(section, itemId, current.values)) {
                 is AppResult.Success -> {
-                    _state.update { it.copy(isSaving = false) }
+                    _state.update { it.copy(isSaving = false, baseline = it.values) }
                     _saved.send(Unit)
                 }
                 is AppResult.Failure -> _state.update {
