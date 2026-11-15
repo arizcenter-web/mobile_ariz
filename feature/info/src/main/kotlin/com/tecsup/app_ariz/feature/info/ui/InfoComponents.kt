@@ -1,5 +1,6 @@
 package com.tecsup.app_ariz.feature.info.ui
 
+import com.tecsup.app_ariz.core.ui.statusBarScrim
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tecsup.app_ariz.core.designsystem.theme.ArizColors
 import com.tecsup.app_ariz.core.ui.LightStatusBarIcons
+import com.tecsup.app_ariz.core.ui.component.EyebrowChip
+import com.tecsup.app_ariz.core.ui.component.PanelHeader
 import com.tecsup.app_ariz.feature.info.R
 
 /**
@@ -56,38 +59,23 @@ internal fun InfoPageLayout(
         modifier = modifier
             .fillMaxSize()
             .background(ArizColors.SectionCanvas)
+            .statusBarScrim()
             .verticalScroll(rememberScrollState()),
     ) {
-        Column(modifier = Modifier.fillMaxWidth().background(ArizColors.Brand).statusBarsPadding().padding(bottom = 28.dp)) {
-            IconButton(
-                onClick = onBackClick,
-                modifier = Modifier.padding(start = 8.dp, top = 8.dp).background(Color.White.copy(alpha = 0.15f), CircleShape),
-            ) {
-                Icon(Icons.AutoMirrored.Outlined.ArrowBack, contentDescription = stringResource(R.string.info_back), tint = Color.White)
+        PanelHeader(onBackClick = onBackClick, backDescription = stringResource(R.string.info_back)) {
+            EyebrowChip(eyebrow)
+            Text(
+                text = title,
+                modifier = Modifier.padding(top = 12.dp),
+                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black, lineHeight = 34.sp),
+                color = Color.White,
+            )
+            subtitle?.let {
+                Text(text = it, modifier = Modifier.padding(top = 8.dp), style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.78f))
             }
-            Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text(
-                    text = eyebrow,
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Black, letterSpacing = 1.8.sp),
-                    color = ArizColors.Accent,
-                )
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Black, lineHeight = 34.sp),
-                    color = Color.White,
-                )
-                subtitle?.let {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
-                        color = Color.White.copy(alpha = 0.8f),
-                    )
-                }
-            }
-            Box(Modifier.fillMaxWidth().padding(top = 8.dp).height(4.dp).background(ArizColors.Accent))
         }
         Column(
-            modifier = Modifier.padding(16.dp).navigationBarsPadding(),
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp).navigationBarsPadding(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             content = content,
         )
@@ -99,10 +87,9 @@ internal fun InfoPageLayout(
 internal fun InfoCard(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surface,
-        border = BorderStroke(1.dp, ArizColors.Edge),
-        shadowElevation = 2.dp,
+        shadowElevation = 1.dp,
     ) {
         Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(10.dp), content = content)
     }
@@ -113,7 +100,7 @@ internal fun Eyebrow(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Black, letterSpacing = 1.6.sp),
-        color = ArizColors.Accent,
+        color = ArizColors.Muted,
     )
 }
 
@@ -135,7 +122,7 @@ internal fun BodyText(text: String) {
 @Composable
 internal fun IconBadge(icon: ImageVector) {
     Box(
-        modifier = Modifier.size(44.dp).background(ArizColors.Brand.copy(alpha = 0.1f), RoundedCornerShape(10.dp)),
+        modifier = Modifier.size(44.dp).background(ArizColors.BrandSoft, RoundedCornerShape(12.dp)),
         contentAlignment = Alignment.Center,
     ) {
         Icon(icon, contentDescription = null, modifier = Modifier.size(22.dp), tint = ArizColors.Brand)

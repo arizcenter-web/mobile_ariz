@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.tecsup.app_ariz.core.designsystem.theme.ArizColors
+import com.tecsup.app_ariz.core.ui.component.PanelMenuRow
 import com.tecsup.app_ariz.feature.info.R
 import com.tecsup.app_ariz.feature.info.navigation.InfoPage
 
@@ -45,28 +45,7 @@ fun InfoHubScreen(
         modifier = modifier,
     ) {
         InfoPage.entries.forEach { page ->
-            Surface(
-                onClick = { onPageClick(page) },
-                modifier = Modifier.fillMaxWidth().height(64.dp),
-                shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colorScheme.surface,
-                border = BorderStroke(1.dp, ArizColors.Edge),
-            ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(14.dp),
-                ) {
-                    Icon(page.icon(), contentDescription = null, modifier = Modifier.size(22.dp), tint = ArizColors.Brand)
-                    Text(
-                        text = stringResource(page.labelRes()),
-                        modifier = Modifier.weight(1f),
-                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-                        color = ArizColors.Ink,
-                    )
-                    Icon(Icons.AutoMirrored.Outlined.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp), tint = ArizColors.Muted)
-                }
-            }
+            PanelMenuRow(icon = page.icon(), label = stringResource(page.labelRes()), onClick = { onPageClick(page) })
         }
     }
 }
