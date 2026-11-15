@@ -32,12 +32,16 @@ data class ProjectFormUiState(
     /** El administrador puede elegir el tipo (lotización o departamentos). */
     val isAdmin: Boolean = false,
     val draft: ProjectDraft = ProjectDraft(),
+    /** Lo último guardado (o cargado): si el borrador es distinto, hay cambios sin guardar. */
+    val baseline: ProjectDraft = ProjectDraft(),
     val errors: Map<ProjectField, ProjectFieldError> = emptyMap(),
     val uploading: Int = 0,
     val isSaving: Boolean = false,
     val error: AppError? = null,
     val photoError: String? = null,
-)
+) {
+    val isDirty: Boolean get() = !isLoading && draft != baseline
+}
 
 sealed interface ProjectFormAction {
     data class Edit(val change: (ProjectDraft) -> ProjectDraft) : ProjectFormAction
@@ -87,7 +91,7 @@ class ProjectFormViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
             when (val result = getDraft(id, asAdmin)) {
-                is AppResult.Success -> _state.update { it.copy(isLoading = false, draft = result.data) }
+                is AppResult.Success -> _state.update { it.copy(isLoading = false, draft = result.data, baseline = result.data) }
                 is AppResult.Failure -> _state.update { it.copy(isLoading = false, error = result.error) }
             }
         }
@@ -150,6 +154,7 @@ class ProjectFormViewModel @Inject constructor(
                 }
                 is AppResult.Success -> created.data.also { createdId = it }
             }
+            _state.update { it.copy(baseline = current.draft) }
             if (!publish) {
                 _state.update { it.copy(isSaving = false) }
                 _events.send(ProjectFormEvent.Saved(published = false))
